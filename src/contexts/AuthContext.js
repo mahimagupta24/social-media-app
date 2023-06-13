@@ -48,5 +48,5 @@ export default function AuthProvider({ children }) {
     }
   }
 
-  return <AuthContext.Provider value={{signupHandler}}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{signupHandler,loginHandler}}>{children}</AuthContext.Provider>;
 }
