@@ -12,7 +12,7 @@ const authReducer = (state, action) => {
 export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const signupHandler=async({firstName,lastName,email,password})=>{
+  const signupHandler=async({firstName,lastName,userName,password})=>{
     try{
        const response =await fetch("/api/auth/signup",{
         method:"POST",
