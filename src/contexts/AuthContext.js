@@ -16,7 +16,7 @@ export default function AuthProvider({ children }) {
     try{
        const response =await fetch("/api/auth/signup",{
         method:"POST",
-        body:JSON.stringify({firstName,lastName,email,password})
+        body:JSON.stringify({firstName,lastName,userName,password})
        })
        if(response.status===201){
         const data= await response.json()
@@ -30,19 +30,20 @@ export default function AuthProvider({ children }) {
         console.error(e)
     }
   }
-  const loginHandler=async({email,password})=>{
+  const loginHandler=async({username,password})=>{
     try{
        const response =await fetch("/api/auth/login",{
         method:"POST",
-        body:JSON.stringify({email,password})
+        body:JSON.stringify({username,password})
        })
-    //    if(response.status===201){
+        if(response.status===200){
         const data= await response.json()
         console.log(data)
         const token = data.encodedToken
         dispatch({type:"AUTH_SUCCESS",payload:token})
+    
        }
-    // }
+     }
     catch(e){
         console.error(e)
     }

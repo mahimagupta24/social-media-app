@@ -7,17 +7,16 @@ export default function Signup() {
   const [signupDetails, setSignupDetails] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    userName: "",
     password: "",
   });
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
-    
+    e.preventDefault();  
     signupHandler(signupDetails);
     setSignupDetails({firstName: "",
     lastName: "",
-    email: "",
+    userName: "",
     password: "",})
   };
   return (
@@ -30,6 +29,7 @@ export default function Signup() {
           onChange={(e) =>
             setSignupDetails({ ...signupDetails, firstName: e.target.value })
           }
+          required
         />
         <label>Last name</label>
         <input
@@ -37,6 +37,7 @@ export default function Signup() {
           onChange={(e) =>
             setSignupDetails({ ...signupDetails, lastName: e.target.value })
           }
+          required
         />
         <label>Email</label>
         <input
@@ -44,8 +45,9 @@ export default function Signup() {
 
           type="email"
           onChange={(e) =>
-            setSignupDetails({ ...signupDetails, email: e.target.value })
+            setSignupDetails({ ...signupDetails, userName: e.target.value })
           }
+          required
         />
         <label>Password</label>
         <input
@@ -54,6 +56,7 @@ export default function Signup() {
           onChange={(e) =>
             setSignupDetails({ ...signupDetails, password: e.target.value })
           }
+          required
         />
         <button type="submit" onClick={()=>signupHandler(signupDetails)}>Create account</button>
         <p>

@@ -1,41 +1,56 @@
 import { useContext } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Login() {
   const { loginHandler } = useContext(AuthContext);
-  const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
+  const [loginDetails, setLoginDetails] = useState({
+    username: "",
+    password: "",
+  });
 
   const onLoginSubmitHandler = (e) => {
     e.preventDefault();
-    loginHandler(loginDetails);
-    setLoginDetails({ email: "", password: "" });
+   
   };
+  const fixedLoginDetails = {
+    username: "adarshbalika",
+    password: "adarshBalika123",
+  };
+
+  const guestLoginHandler = () => {
+    setLoginDetails({
+      username: fixedLoginDetails.username,
+      password: fixedLoginDetails.password,
+    });
+    console.log(fixedLoginDetails.username)
+    loginHandler(loginDetails);
+  };
+
   return (
     <div>
       <h1>Login</h1>
       <form onSubmit={onLoginSubmitHandler}>
         <label>Email</label>
         <input
-          value={loginDetails.email}
-          type="email"
+          value={loginDetails.username}
           onChange={(e) =>
-            setLoginDetails({ ...loginDetails, email: e.target.value })
+            setLoginDetails({ ...loginDetails, username: e.target.value })
           }
+          required
         />
-        <label>Paasword</label>
+        <label>Password</label>
         <input
           value={loginDetails.password}
           type="password"
           onChange={(e) =>
             setLoginDetails({ ...loginDetails, password: e.target.value })
           }
+          required
         />
-        <button type="submit" onClick={() => loginHandler(loginDetails)}>
-          Login
-        </button>
+        <button type="submit">Login</button>
+        <button onClick={guestLoginHandler}>Guest login</button>
         <p>
           Don't have an account?<Link to="/signup">Signup</Link>
         </p>
