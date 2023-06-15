@@ -6,11 +6,14 @@ import Home from "./pages/features/Home";
 import Bookmark from "./pages/features/Bookmark";
 import LikedPost from "./pages/features/LikedPost";
 import Explorer from "./pages/features/Explorer";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
     <div className="App">
-      <SideBar/>
+      {/* <SideBar/> */}
+      {/* <Profile/> */}
+      {/* <Explorer/> */}
       <Routes>
         <Route path="/"element={<Home/>}/>
         <Route path ="/signup"element={<Signup/>}/>
@@ -18,6 +21,7 @@ function App() {
         <Route path="/bookmark"element={<Bookmark/>}/>
         <Route path="/liked"element={<LikedPost/>}/>
         <Route path="/explore"element={<Explorer/>}/>
+        <Route path ="/profile/:username"element={<Profile/>}/>
       </Routes>
     </div>
   );

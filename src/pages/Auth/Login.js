@@ -16,7 +16,7 @@ export default function Login() {
   };
   const fixedLoginDetails = {
     username: "adarshbalika",
-    password: "adarshBalika123",
+    password: "adarshbalika123",
   };
 
   const guestLoginHandler = () => {

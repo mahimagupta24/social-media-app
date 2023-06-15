@@ -10,6 +10,7 @@ export const posts = [
   {
     _id: uuid(),
     content: "Exploring new places",
+    mediaUrl:"https://1.bp.blogspot.com/-MiUcyHifn1U/XrvfpVzmI7I/AAAAAAAAAjc/eYazSDwPLasqFXYX7bx_yJUipkZ8Ci5IQCLcBGAsYHQ/s1600/tea-gardens-munnar.jpg",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -18,7 +19,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "rabiyaakhter",
+        userhandler: "johndoe",
         text: "I love traveling and discovering new destinations",
         votes: {
           upvotedBy: [],
@@ -30,9 +31,11 @@ export const posts = [
     createdAt: "2023-03-12T15:48:12+05:30",
     updatedAt: formatDate(),
   },
+
   {
     _id: uuid(),
     content: "Enjoying a beautiful sunset!",
+    mediaUrl:"https://tse4.mm.bing.net/th?id=OIP.IwYFjR9kEWVWqXq4g1jpOAHaEK&pid=Api&P=0&h=180",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -43,22 +46,22 @@ export const posts = [
     createdAt: "2023-02-25T10:30:33+05:30",
     updatedAt: formatDate(),
   },
+
   {
     _id: uuid(),
     content: "Delicious food at my favorite restaurant!",
+    mediaUrl:"https://wallpapercave.com/wp/wp3724331.jpg",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    username: "johnsmith",
-    createdAt: "2023-03-28T21:00:15+05:30",
-    updatedAt: formatDate(),
+   
 
     comments: [
       {
         _id: uuid(),
-        username: "aryagehlot",
+        userhandler: "adarshbalika",
         text: "I love that restaurant too! The food is amazing.",
         votes: {
           upvotedBy: [],
@@ -66,7 +69,11 @@ export const posts = [
         },
       },
     ],
+    username: "raimagupta",
+    createdAt: "2023-03-28T21:00:15+05:30",
+    updatedAt: formatDate(),
   },
+  
   {
     _id: uuid(),
     content: "Excited for the weekend getaway!",
@@ -78,7 +85,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "himaniraina",
+        userhandler: "shubhamsoni",
         text: "Enjoy your getaway. Have a great time!",
         votes: {
           upvotedBy: [],
@@ -86,13 +93,13 @@ export const posts = [
         },
       },
     ],
-    username: "janesmith",
+    username: "adarshbalika",
     createdAt: "2023-04-03T09:00:10+05:30",
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
-    content: "Sharing some inspiration!",
+    content: "The best way to predict your future is to create it! Love this quote by Ibrahim Lincon",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -101,7 +108,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "saniadutta",
+        userhandler: "adarshbalika",
         text: "Your posts always inspire me! Thank you for sharing",
         votes: {
           upvotedBy: [],
@@ -122,7 +129,7 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "michaelscott",
+    username: "johndoe",
     createdAt: "2023-04-21T23:00:14+05:30",
     updatedAt: formatDate(),
   },
@@ -137,7 +144,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "omkarsharma",
+        userhandler: "adarshbalika",
         text: "Congratulations! You deserve all the success. Keep going!",
         votes: {
           upvotedBy: [],
@@ -145,7 +152,7 @@ export const posts = [
         },
       },
     ],
-    username: "henrybill",
+    username: "johndoe",
     createdAt: "2023-03-17T10:45:00+05:30",
     updatedAt: formatDate(),
   },
@@ -160,7 +167,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "gurpreetsingh",
+        userhandler: "raimagupta",
         text: "That sounds delicious! Can you share the recipe?",
         votes: {
           upvotedBy: [],
@@ -168,7 +175,7 @@ export const posts = [
         },
       },
     ],
-    username: "foodieexplorer",
+    username: "adarshbalika",
     createdAt: "2023-03-05T18:45:00+05:30",
     updatedAt: formatDate(),
   },
@@ -181,7 +188,7 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "harmanjoshi",
+    username: "shubhamsoni",
     createdAt: "2023-04-08T17:05:04+05:30",
     updatedAt: formatDate(),
   },
@@ -194,7 +201,7 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "rohanbatra",
+    username: "adarshbalika",
     createdAt: "2023-02-10T07:15:10+05:30",
     updatedAt: formatDate(),
   },
@@ -216,14 +223,30 @@ export const posts = [
     _id: uuid(),
     content:
       "Wow, the weather is absolutely gorgeous today! Perfect day for some outdoor activities!",
-    likes: {
+    mediaUrl:"https://jooinn.com/images/cloudy-1.jpg",
+      likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    username: "sunilsingh",
+    username: "shubhamsoni",
     createdAt: "2023-03-15T09:45:13+05:30",
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content:" Just picked up this captivating novel that has been on my reading list for a while.If you have any book recommendations or if you've read this one, I'd love to hear your thoughts",
+      
+    mediaUrl:"https://www.leafmarks.com/uploads/9/8/4/9/98493490/hamlet-by-william-shakespeare_orig.jpg",
+      likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    username: "mahimagupta",
+    createdAt: "2023-05-16T19:00:13+05:30",
     updatedAt: formatDate(),
   },
 ];
