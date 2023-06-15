@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
         const data= await response.json()
         console.log(data)
         const token = data.encodedToken
-        localStorage.setItem("token",token)
+       
         dispatch({type:"AUTH_SUCCESS",payload:token})
        }
     }
@@ -40,6 +40,8 @@ export default function AuthProvider({ children }) {
         const data= await response.json()
         console.log(data)
         const token = data.encodedToken
+        localStorage.setItem("token",token)
+        console.log(token)
         dispatch({type:"AUTH_SUCCESS",payload:token})
     
        }

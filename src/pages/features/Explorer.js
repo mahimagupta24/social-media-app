@@ -28,9 +28,10 @@ export default function Explorer() {
   return (
     <div>
       <ul>
-        {posts.map(({ _id, content, username, createdAt, mediaUrl }) => (
+        {posts.map(({ _id, content, firstName,lastName,username, createdAt, mediaUrl }) => (
           <li key={_id} onClick={() => onUsernameClickHandler(username)}>
-            <h3>{username}</h3>
+            <h2>{firstName} {lastName}</h2>
+            <h5>@{username}</h5>
             <span>{createdAt}</span>
             <p>{content}</p>
             {mediaUrl && (

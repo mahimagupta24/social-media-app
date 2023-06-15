@@ -7,11 +7,12 @@ import Bookmark from "./pages/features/Bookmark";
 import LikedPost from "./pages/features/LikedPost";
 import Explorer from "./pages/features/Explorer";
 import Profile from "./pages/Profile/Profile";
+import Mockman from "mockman-js";
 
 function App() {
   return (
     <div className="App">
-      {/* <SideBar/> */}
+      <SideBar/>
       {/* <Profile/> */}
       {/* <Explorer/> */}
       <Routes>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/liked"element={<LikedPost/>}/>
         <Route path="/explore"element={<Explorer/>}/>
         <Route path ="/profile/:username"element={<Profile/>}/>
+        <Route path ="/mockman"element={<Mockman/>}/>
       </Routes>
     </div>
   );
