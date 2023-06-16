@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Login() {
+ 
   const { loginHandler } = useContext(AuthContext);
   const [loginDetails, setLoginDetails] = useState({
     username: "",
@@ -12,7 +13,7 @@ export default function Login() {
 
   const onLoginSubmitHandler = (e) => {
     e.preventDefault();
-   
+    loginHandler(loginDetails);
   };
   const fixedLoginDetails = {
     username: "adarshbalika",
@@ -25,7 +26,8 @@ export default function Login() {
       password: fixedLoginDetails.password,
     });
     console.log(fixedLoginDetails.username)
-    loginHandler(loginDetails);
+    
+    // navigate("/explore")
   };
 
   return (

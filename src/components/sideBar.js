@@ -15,9 +15,7 @@ export default function SideBar() {
       <div>
       <Link to="/bookmark"> <span><i className="fa fa-bookmark"></i></span>Bookmark</Link>
       </div>
-      <div>
-      <Link to="/liked"> <span><i className="fa fa-heart"></i></span>Like</Link>
-      </div>
+     
     </div>
   );
 }

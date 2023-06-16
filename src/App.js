@@ -4,15 +4,16 @@ import Login from "./pages/Auth/Login";
 import SideBar from "./components/sideBar";
 import Home from "./pages/features/Home";
 import Bookmark from "./pages/features/Bookmark";
-import LikedPost from "./pages/features/LikedPost";
 import Explorer from "./pages/features/Explorer";
 import Profile from "./pages/Profile/Profile";
 import Mockman from "mockman-js";
+import Suggestions from "./components/suggestions";
 
 function App() {
   return (
     <div className="App">
-      <SideBar/>
+      {/* <SideBar/> */}
+      {/* <Suggestions/> */}
       {/* <Profile/> */}
       {/* <Explorer/> */}
       <Routes>
@@ -20,7 +21,6 @@ function App() {
         <Route path ="/signup"element={<Signup/>}/>
         <Route path ="/login"element={<Login/>}/>
         <Route path="/bookmark"element={<Bookmark/>}/>
-        <Route path="/liked"element={<LikedPost/>}/>
         <Route path="/explore"element={<Explorer/>}/>
         <Route path ="/profile/:username"element={<Profile/>}/>
         <Route path ="/mockman"element={<Mockman/>}/>
