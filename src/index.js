@@ -17,11 +17,11 @@ root.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        {/* <FeatureProvider> */}
+        <FeatureProvider>
           <UserProvider>
             <App />
           </UserProvider>
-        {/* </FeatureProvider> */}
+        </FeatureProvider>
       </AuthProvider>
     </Router>
   </React.StrictMode>

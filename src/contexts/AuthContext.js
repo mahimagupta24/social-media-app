@@ -42,6 +42,7 @@ export default function AuthProvider({ children }) {
       if (response.status === 200) {
         const data = await response.json();
         const token = data.encodedToken;
+        console.log(token)
         localStorage.setItem("token", token);
         
         console.log(data.foundUser);

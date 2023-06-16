@@ -12,7 +12,7 @@ export const users = [
     username: "adarshbalika",
     password: "adarshbalika123",
     bio: "Social Media Influencer",
-    createdAt: formatDate(),
+    createdAt: "2022-03-16T10:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
       { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
@@ -20,7 +20,6 @@ export const users = [
       { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
     ],
     following: [
-      { _id: uuid(), fullname: "Mahima Gupta", username: "mahimagupta" },
     ],
   },
   {
@@ -29,7 +28,7 @@ export const users = [
     username: "shubhamsoni",
     password: "shubhamsoni123",
     bio: "Be yourself",
-    createdAt: formatDate(),
+    createdAt: "2022-05-06T12:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
       { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
@@ -49,14 +48,9 @@ export const users = [
     username: "mahimagupta",
     password: "mahimagupta123",
     bio: "Aspiring Web developer",
-    createdAt: formatDate(),
+    createdAt: "2022-01-18T22:00:10+05:30",
     updatedAt: formatDate(),
     followers: [
-      {
-        _id: uuid(),
-        fullname: "Adarsh Balika",
-        username: "adarshbalika",
-      },
       { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
     ],
     following: [
@@ -69,7 +63,7 @@ export const users = [
     username: "raimagupta",
     password: "raimagupta123",
     bio: "Frontend Engineer",
-    createdAt: formatDate(),
+    createdAt: "2022-07-26T11:20:10+05:30",
     updatedAt: formatDate(),
     followers: [
       {
@@ -94,7 +88,7 @@ export const users = [
     username: "johndoe",
     password: "johndoe123",
     bio: "What's up?",
-    createdAt: formatDate(),
+    createdAt: "2022-02-04T08:35:30+05:30",
     updatedAt: formatDate(),
     follower: [
       {

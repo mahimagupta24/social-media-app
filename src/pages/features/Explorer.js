@@ -1,34 +1,14 @@
 import { useContext } from "react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import { FeatureContext } from "../../contexts/FeatureContext";
 
 export default function Explorer() {
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-  const [showlikedPost, setShowLikedPost] = useState(false);
+  const { allposts, setAllPosts, onUsernameClickHandler } =
+    useContext(FeatureContext);
+  // const [showlikedPost, setShowLikedPost] = useState(false);
+  const [sortOrder, setSortOrder] = useState(null);
   // const { getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
-  const fetchAllPosts = async () => {
-    try {
-      const response = await fetch("/api/posts", {
-        method: "GET",
-      });
-      if (response.status === 200) {
-        const data = await response.json();
-        setPosts(data.posts);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllPosts();
-  }, []);
-
-  const onUsernameClickHandler = (name) => {
-    navigate(`/profile/${name}`);
-  };
 
   // const handleLikePost = (postId) => {
   //   getLikedPosts(postId);
@@ -38,10 +18,22 @@ export default function Explorer() {
   //   getUnLikedPosts(postId);
   //   setShowLikedPost(true);
   // };
+  const handleSortedPost = () => {
+    if (!sortOrder) {
+      const sortedPosts = [...allposts].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setAllPosts(sortedPosts);
+      
+    } else {
+      setAllPosts([...allposts]);   
+    }
+  };
   return (
     <div>
       <ul>
-        {posts.map(
+        <button onClick={handleSortedPost}>Latest Post</button>
+        {allposts.map(
           ({
             _id,
             content,
