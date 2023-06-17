@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function SideBar() {
+  const{logoutHandler}=useContext(AuthContext)
   return (
     <div>
         <div>
@@ -15,7 +18,7 @@ export default function SideBar() {
       <div>
       <Link to="/bookmark"> <span><i className="fa fa-bookmark"></i></span>Bookmark</Link>
       </div>
-     
+     <button onClick={logoutHandler}>Logout</button>
     </div>
   );
 }
