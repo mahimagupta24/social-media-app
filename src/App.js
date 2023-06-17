@@ -8,6 +8,7 @@ import Explorer from "./pages/features/Explorer";
 import Profile from "./pages/Profile/Profile";
 import Mockman from "mockman-js";
 import Suggestions from "./components/suggestions";
+import RequiresAuth from "./components/RequiresAuth";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       {/* <Profile/> */}
       {/* <Explorer/> */}
       <Routes>
-        <Route path="/"element={<Home/>}/>
+        <Route path="/"element={<RequiresAuth><Home/></RequiresAuth>}/>
         <Route path ="/signup"element={<Signup/>}/>
         <Route path ="/login"element={<Login/>}/>
         <Route path="/bookmark"element={<Bookmark/>}/>

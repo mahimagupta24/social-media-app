@@ -3,27 +3,29 @@ import { UserContext } from "../contexts/UserContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Suggestions() {
-  const { state, followUsers } = useContext(UserContext);
-  // console.log(users);
-  const { user } = useContext(AuthContext);
-  console.log(user);
-  const suggetsedUsers = state.users.filter(
-    ({ _id }) => _id !== (user && user._id)
-  );
-  console.log(suggetsedUsers);
+  const { state, followUsers,getAllUsers  } = useContext(UserContext);
+  const {user} = useContext(AuthContext)
+const suggestedUsers = state.users.filter(({_id})=>_id!==user._id)
+console.log(suggestedUsers)
 
   const handleFollow = (id) => {
     followUsers(id);
+    const updatedUsers = suggestedUsers.filter(({_id})=>_id!==id)
+    state.users = updatedUsers
+    console.log(updatedUsers)
   };
   return (
     <div>
       <h1>Suggested users</h1>
-      {suggetsedUsers.map(({ _id, fullname, username }) => (
-        <li key={_id}>
-          <p>{fullname}</p>
-          <p>@{username}</p>
-          <button onClick={() => handleFollow(_id)}>Follow</button>
-        </li>
+      {suggestedUsers.map(({ _id, fullname, username }) => (
+        <div key={_id}>
+          <li>{fullname}</li>
+          <li>@{username}</li>
+          <li>
+            {" "}
+            <button onClick={() => handleFollow(_id)}>Follow</button>
+          </li>
+        </div>
       ))}
     </div>
   );

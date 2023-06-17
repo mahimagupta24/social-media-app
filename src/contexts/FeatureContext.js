@@ -7,7 +7,7 @@ export const FeatureContext = createContext();
 
 export default function FeatureProvider({children}){
     const navigate = useNavigate();
-    const[allposts,setAllPosts] =useState([])
+    const[posts,setPosts] =useState([])
 
     const fetchAllPosts = async () => {
         try {
@@ -18,7 +18,7 @@ export default function FeatureProvider({children}){
           if (response.status === 200) {
             const data = await response.json();
             console.log(data)
-            setAllPosts(data.posts);
+            setPosts(data.posts);
             
           }
         } catch (e) {
@@ -76,5 +76,5 @@ export default function FeatureProvider({children}){
 //     getUnLikedPosts()
 // },[])
 
-    return <FeatureContext.Provider value={{allposts,setAllPosts,onUsernameClickHandler}}>{children}</FeatureContext.Provider>
+    return <FeatureContext.Provider value={{posts,setPosts,onUsernameClickHandler}}>{children}</FeatureContext.Provider>
 }
