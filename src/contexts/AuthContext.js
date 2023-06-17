@@ -9,12 +9,15 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case "AUTH_SUCCESS":
       return { ...state, encodedToken: action.payload };
+      case "LOGOUT":
+        return {...state,encodedToken:""}
   }
 };
 export default function AuthProvider({ children }) {
   const navigate = useNavigate()
   const [user, setUser] = useState(null);
   const [state, dispatch] = useReducer(authReducer, initialState);
+ 
 
   const signupHandler = async ({ firstName, lastName, userName, password }) => {
     try {
@@ -24,10 +27,9 @@ export default function AuthProvider({ children }) {
       });
       if (response.status === 201) {
         const data = await response.json();
-        console.log(data);
-        const token = data.encodedToken;
+        // console.log(data);
+        dispatch({ type: "AUTH_SUCCESS", payload: data.encodedToken });
 
-        dispatch({ type: "AUTH_SUCCESS", payload: token });
       }
     } catch (e) {
       console.error(e);
@@ -41,23 +43,32 @@ export default function AuthProvider({ children }) {
       });
       if (response.status === 200) {
         const data = await response.json();
-        const token = data.encodedToken;
-        console.log(token)
-        localStorage.setItem("token", token);
+        dispatch({ type: "AUTH_SUCCESS", payload: data.encodedToken });
+
+        const loggedInUser = data.foundUser
+          localStorage.setItem("loggedInUser",JSON.stringify(loggedInUser))
+
+         console.log(loggedInUser);
         
-        console.log(data.foundUser);
-        dispatch({ type: "AUTH_SUCCESS", payload: token });
-        setUser(data.foundUser);
-        console.log(user)
+        setUser(loggedInUser);
+        
+        localStorage.setItem("token", data.encodedToken);
+
         navigate("/")
       }
     } catch (e) {
       console.error(e);
     }
   };
+const isLoggedIn = state.encodedToken.length!==0
+
+  const logoutHandler = ()=>{
+    localStorage.removeItem("token");
+    dispatch({type:"LOGOUT"})
+  }
 
   return (
-    <AuthContext.Provider value={{ signupHandler, loginHandler, user }}>
+    <AuthContext.Provider value={{ state,signupHandler, loginHandler, user,logoutHandler,isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
