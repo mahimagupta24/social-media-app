@@ -12,6 +12,7 @@ export const users = [
     username: "adarshbalika",
     password: "adarshbalika123",
     bio: "Social Media Influencer",
+    bookmark:[],
     createdAt: "2022-03-16T10:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
@@ -28,6 +29,7 @@ export const users = [
     username: "shubhamsoni",
     password: "shubhamsoni123",
     bio: "Be yourself",
+    bookmark:[],
     createdAt: "2022-05-06T12:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
@@ -48,6 +50,7 @@ export const users = [
     username: "mahimagupta",
     password: "mahimagupta123",
     bio: "Aspiring Web developer",
+    bookmark:[],
     createdAt: "2022-01-18T22:00:10+05:30",
     updatedAt: formatDate(),
     followers: [
@@ -63,6 +66,7 @@ export const users = [
     username: "raimagupta",
     password: "raimagupta123",
     bio: "Frontend Engineer",
+    bookmark:[],
     createdAt: "2022-07-26T11:20:10+05:30",
     updatedAt: formatDate(),
     followers: [
@@ -88,6 +92,7 @@ export const users = [
     username: "johndoe",
     password: "johndoe123",
     bio: "What's up?",
+    bookmark:[],
     createdAt: "2022-02-04T08:35:30+05:30",
     updatedAt: formatDate(),
     follower: [

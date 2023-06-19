@@ -10,7 +10,7 @@ import { UserContext } from "../../contexts/UserContext";
 export default function Home() {
   const { posts, setPosts, onUsernameClickHandler } =
     useContext(FeatureContext);
-  const { user,dispatch,state} = useContext(UserContext);
+  const { user,dispatch,fetchBookmarkPosts} = useContext(UserContext);
   console.log(user);
   const [sortOrder, setSortOrder] = useState(null);
   // const { getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
@@ -62,8 +62,13 @@ console.log(loggedInUserPosts)
     user?.following?.some((el) => el.username === post.username)
   );
 
+  const handleBookMark = (id)=>{
+    fetchBookmarkPosts(id)
+  }
   console.log(posts);
   console.log(followingPosts);
+
+  const allPosts = [...loggedInUserPosts,...followingPosts]
   return (
     <div>
       <SideBar />
@@ -71,10 +76,14 @@ console.log(loggedInUserPosts)
       <ul>
         <button onClick={handleSortedPost}>Latest Post</button>
        
-        {loggedInUserPosts.map(post=><li>{post.content}</li>)}
+        {/* {loggedInUserPosts.map(post=><li>{post.content} */}
+        
+        {/* </li>)} */}
 
-        {followingPosts.map((followingPost) => (
-          <li>{followingPost.content}</li>
+        {allPosts.map((post) => (
+          <li>{post.content}
+         <span onClick={()=>handleBookMark(post._id)}> <i className="fa fa-bookmark"></i></span>
+          </li>
         ))}
         {/* <div>
                 {showlikedPost && (
@@ -89,6 +98,7 @@ console.log(loggedInUserPosts)
                   </span>
 }
               </div> */}
+              
       </ul>
     </div>
   );
