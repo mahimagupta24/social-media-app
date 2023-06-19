@@ -1,28 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FeatureContext } from "../../contexts/FeatureContext";
 
 export default function Profile() {
   const { username } = useParams();
 
   console.log(username);
-  const [userPosts, setUserPosts] = useState([]);
-  console.log(userPosts)
-  const getUserPosts = async () => {
-    try {
-      const response = await fetch(`/api/posts/user/${username}`);
-      if (response.status === 200) {
-        const data = await response.json();
-        setUserPosts(data.posts);
-        console.log(data.posts);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  useEffect(() => {
-    getUserPosts();
-  }, []);
 
+  const{userPosts,getUserPosts} = useContext(FeatureContext)
+  console.log(userPosts)
+
+  
   return (
     <div>
       {userPosts.map(({_id, content, username, createdAt, mediaUrl}) => (

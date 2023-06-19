@@ -11,8 +11,6 @@ const userReducer = (state, action) => {
       return { ...state, users: action.payload };
     case "FOLLOW_USER":
       return { ...state, followUser: action.payload };
-    case "GET_USER_POSTS":
-      return { ...state, userPosts: action.payload };
     case "ADD_BOOKMARK_POSTS":
       return { ...state, bookmarkPosts: action.payload };
     case "REMOVE_BOOKMARK_POSTS":
@@ -27,7 +25,6 @@ export default function UserProvider({ children }) {
   const initialState = {
     users: [],
     followUser: [],
-    userPosts: [],
     bookmarkPosts: [],
   };
   const [state, dispatch] = useReducer(userReducer, initialState);

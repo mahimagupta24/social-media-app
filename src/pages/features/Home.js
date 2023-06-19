@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function Home() {
-  const { posts, setPosts, onUsernameClickHandler } =
+  const { posts, setPosts, onUsernameClickHandler,getUserPosts,userPosts} =
     useContext(FeatureContext);
   const { user, dispatch, addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
@@ -26,21 +26,11 @@ export default function Home() {
   // };
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const getUserPosts = async (username) => {
-    try {
-      const response = await fetch(`/api/posts/user/${username}`, {
-        method: "GET",
-      });
-      const data = await response.json();
-      console.log("posts", data);
-      dispatch({ type: "GET_USER_POSTS", payload: data.posts });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  useEffect(() => {
-    getUserPosts();
-  }, []);
+  
+
+  useEffect(()=>{
+    getUserPosts(user?.username)
+  },[user?.username])
 
   const handleSortedPost = () => {
     if (!sortOrder) {
@@ -73,15 +63,18 @@ export default function Home() {
         <button onClick={handleSortedPost}>Latest Post</button>
 
         {allPosts.map((post) => (
-          <li>
-            {post.content}
+          <li key={post._id}>
+            <div>
+            <span>{post.firstName} {post.lastName}</span>
+            <span>@{post.username}</span>
+            </div>
+            <div>{post.mediaUrl&&<img src={post.mediaUrl}  alt="random" height="250px" width="300px" />}</div>
+            <p>{post.content}</p>
             {isBookmarked(post._id) ?<span onClick={() => removeBookmarkPosts(post._id)}>
-              <i className="far fa-bookmark"></i>
-            </span>:<span onClick={() => addBookmarkPosts(post._id)}>
               <i className="fa fa-bookmark"></i>
-            </span>}
-            
-            
+            </span>:<span onClick={() => addBookmarkPosts(post._id)}>
+              <i className="far fa-bookmark"></i>
+            </span>} 
           </li>
         ))}
       </ul>

@@ -1,9 +1,15 @@
 import { useContext } from "react";
 import { FeatureContext } from "../../contexts/FeatureContext";
+import { useNavigate } from "react-router";
 
 export default function Explorer() {
-  const { posts } = useContext(FeatureContext);
+  const { posts, getUserPosts } = useContext(FeatureContext);
+  const navigate = useNavigate();
 
+  const handleUserPosts = (username) => {
+    getUserPosts(username);
+    navigate(`/profile/${username}`);
+  };
   return (
     <div>
       {posts.map(
@@ -17,7 +23,7 @@ export default function Explorer() {
           mediaUrl,
           likes,
         }) => (
-          <li key={_id}>
+          <li key={_id} onClick={() =>handleUserPosts(username)}>
             <h2>
               {firstName} {lastName}
             </h2>

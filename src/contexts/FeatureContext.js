@@ -6,9 +6,8 @@ import { useNavigate } from "react-router";
 export const FeatureContext = createContext();
 
 export default function FeatureProvider({children}){
-    const navigate = useNavigate();
     const[posts,setPosts] =useState([])
-
+    const [userPosts, setUserPosts] = useState([]);
     const fetchAllPosts = async () => {
         try {
           const response = await fetch("/api/posts", {
@@ -30,9 +29,25 @@ export default function FeatureProvider({children}){
         fetchAllPosts();
       }, []);
     
-      const onUsernameClickHandler = (name) => {
-        navigate(`/profile/${name}`);
+      // const onUsernameClickHandler = (name) => {
+      //   navigate(`/profile/${name}`);
+      // };
+      const getUserPosts = async (username) => {
+        try {
+          const response = await fetch(`/api/posts/user/${username}`);
+          console.log(response)
+          if (response.status === 200) {
+            const data = await response.json();
+            setUserPosts(data.posts);
+            console.log(data.posts);
+          }
+        } catch (e) {
+          console.error(e);
+        }
       };
+      useEffect(() => {
+        getUserPosts();
+      }, []);
     
      
 // const getLikedPosts = async(postId)=>{
@@ -76,5 +91,5 @@ export default function FeatureProvider({children}){
 //     getUnLikedPosts()
 // },[])
 
-    return <FeatureContext.Provider value={{posts,setPosts,onUsernameClickHandler}}>{children}</FeatureContext.Provider>
+    return <FeatureContext.Provider value={{posts,setPosts,userPosts,getUserPosts}}>{children}</FeatureContext.Provider>
 }
