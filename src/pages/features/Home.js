@@ -8,8 +8,18 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function Home() {
-  const { posts, setPosts, onUsernameClickHandler,getUserPosts,userPosts} =
-    useContext(FeatureContext);
+  const {
+    posts,
+    setPosts,
+    onUsernameClickHandler,
+    getUserPosts,
+    userPosts,
+    setNewPost,
+    addNewPost,
+    getLikedPosts,
+    likedPosts,
+    getUnLikedPosts,
+  } = useContext(FeatureContext);
   const { user, dispatch, addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
   console.log(state?.bookmarkPosts);
@@ -26,11 +36,9 @@ export default function Home() {
   // };
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  
-
-  useEffect(()=>{
-    getUserPosts(user?.username)
-  },[user?.username])
+  useEffect(() => {
+    getUserPosts(user?.username);
+  }, [user?.username]);
 
   const handleSortedPost = () => {
     if (!sortOrder) {
@@ -51,30 +59,72 @@ export default function Home() {
     user?.following?.some((el) => el.username === post.username)
   );
 
-   const isBookmarked = (id)=>state?.bookmarkPosts?.some(({ _id }) => _id === id);
+  const isBookmarked = (id) =>
+    state?.bookmarkPosts?.some(({ _id }) => _id === id);
+
+  // const isPostLiked = (postId) =>
+  //   likedPosts && likedPosts.some(({ _id }) => _id === postId);
 
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
+  const handlePostSubmit = () => {
+    addNewPost();
+    setNewPost("");
+    console.log("abc");
+  };
+
+  const handlePostChange = (e) => {
+    setNewPost(e.target.value);
+  };
   return (
     <div>
       <SideBar />
       <Suggestions />
-      <ul>
-        <button onClick={handleSortedPost}>Latest Post</button>
 
+      <textarea onChange={handlePostChange}></textarea>
+      <button onClick={handlePostSubmit}>Post</button>
+      <button onClick={handleSortedPost}>Latest Post</button>
+      <ul>
         {allPosts.map((post) => (
           <li key={post._id}>
             <div>
-            <span>{post.firstName} {post.lastName}</span>
-            <span>@{post.username}</span>
+              <span>
+                {post.firstName} {post.lastName}
+              </span>
+              <span>@{post.username}</span>
             </div>
-            <div>{post.mediaUrl&&<img src={post.mediaUrl}  alt="random" height="250px" width="300px" />}</div>
+            <div>
+              {post.mediaUrl && (
+                <img
+                  src={post.mediaUrl}
+                  alt="random"
+                  height="250px"
+                  width="300px"
+                />
+              )}
+            </div>
             <p>{post.content}</p>
-            {isBookmarked(post._id) ?<span onClick={() => removeBookmarkPosts(post._id)}>
-              <i className="fa fa-bookmark"></i>
-            </span>:<span onClick={() => addBookmarkPosts(post._id)}>
-              <i className="far fa-bookmark"></i>
-            </span>} 
+            {isBookmarked(post._id) ? (
+              <span onClick={() => removeBookmarkPosts(post._id)}>
+                <i className="fa fa-bookmark"></i>
+              </span>
+            ) : (
+              <span onClick={() => addBookmarkPosts(post._id)}>
+                <i className="far fa-bookmark"></i>
+              </span>
+            )}
+            {/* {isPostLiked(post._id) ? (
+              <span onClick={() => getUnLikedPosts(post._id)}>
+                <i className="fa fa-heart"></i>
+              </span>
+            ) : ( */}
+              <span
+                style={{ color: "pink" }}
+                onClick={() => getLikedPosts(post._id)}
+              >
+                <i className="fa fa-heart"></i>
+              </span>
+            
           </li>
         ))}
       </ul>
