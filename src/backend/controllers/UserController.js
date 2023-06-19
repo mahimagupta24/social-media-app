@@ -198,47 +198,6 @@ export const bookmarkPostHandler = function (schema, request) {
  * send POST Request at /api/users/remove-bookmark/:postId/
  * */
 
-// export const removePostFromBookmarkHandler = function (schema, request) {
-//   const { postId } = request.params;
-//   let user = requiresAuth.call(this, request);
-//   try {
-//     if (!user) {
-//       return new Response(
-//         404,
-//         {},
-//         {
-//           errors: [
-//             "The username you entered is not Registered. Not Found error",
-//           ],
-//         }
-//       );
-//     }
-//     const isBookmarked = user.bookmarks.some(
-//       (currPost) => currPost._id === postId
-//     );
-//     if (!isBookmarked) {
-//       return new Response(400, {}, { errors: ["Post not bookmarked yet"] });
-//     }
-//     const filteredBookmarks = user.bookmarks.filter(
-//       (currPost) => currPost._id !== postId
-//     );
-//     user = { ...user, bookmarks: filteredBookmarks };
-//     this.db.users.update(
-//       { _id: user._id },
-//       { ...user, updatedAt: formatDate() }
-//     );
-//     return new Response(200, {}, { bookmarks: user.bookmarks });
-//   } catch (error) {
-//     return new Response(
-//       500,
-//       {},
-//       {
-//         error,
-//       }
-//     );
-//   }
-// };
-
 export const removePostFromBookmarkHandler = function (schema, request) {
   const { postId } = request.params;
   let user = requiresAuth.call(this, request);
@@ -255,13 +214,13 @@ export const removePostFromBookmarkHandler = function (schema, request) {
       );
     }
     const isBookmarked = user.bookmarks.some(
-      (currPostId) => currPostId === postId
+      (currPost) => currPost._id === postId
     );
     if (!isBookmarked) {
       return new Response(400, {}, { errors: ["Post not bookmarked yet"] });
     }
     const filteredBookmarks = user.bookmarks.filter(
-      (currPostId) => currPostId !== postId
+      (currPost) => currPost._id !== postId
     );
     user = { ...user, bookmarks: filteredBookmarks };
     this.db.users.update(
@@ -279,6 +238,47 @@ export const removePostFromBookmarkHandler = function (schema, request) {
     );
   }
 };
+
+// export const removePostFromBookmarkHandler = function (schema, request) {
+//   const { postId } = request.params;
+//   let user = requiresAuth.call(this, request);
+//   try {
+//     if (!user) {
+//       return new Response(
+//         404,
+//         {},
+//         {
+//           errors: [
+//             "The username you entered is not Registered. Not Found error",
+//           ],
+//         }
+//       );
+//     }
+//     const isBookmarked = user.bookmarks.some(
+//       (currPostId) => currPostId === postId
+//     );
+//     if (!isBookmarked) {
+//       return new Response(400, {}, { errors: ["Post not bookmarked yet"] });
+//     }
+//     const filteredBookmarks = user.bookmarks.filter(
+//       (currPostId) => currPostId !== postId
+//     );
+//     user = { ...user, bookmarks: filteredBookmarks };
+//     this.db.users.update(
+//       { _id: user._id },
+//       { ...user, updatedAt: formatDate() }
+//     );
+//     return new Response(200, {}, { bookmarks: user.bookmarks });
+//   } catch (error) {
+//     return new Response(
+//       500,
+//       {},
+//       {
+//         error,
+//       }
+//     );
+//   }
+// };
 
 /**
  * This handler handles follow action.

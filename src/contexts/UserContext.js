@@ -13,12 +13,16 @@ const userReducer = (state, action) => {
       return { ...state, followUser: action.payload };
     case "GET_USER_POSTS":
       return { ...state, userPosts: action.payload };
-    case "GET_BOOKMARK_POSTS":
+    case "ADD_BOOKMARK_POSTS":
       return { ...state, bookmarkPosts: action.payload };
+    case "REMOVE_BOOKMARK_POSTS":
+      const filteredPosts = state.bookmarkPosts.filter(({_id})=>_id!==action.payload)
+      return { ...state, bookmarkPosts: filteredPosts };
     default:
       return state;
   }
 };
+
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
@@ -74,25 +78,50 @@ export default function UserProvider({ children }) {
     followUsers();
   }, []);
 
-  const fetchBookmarkPosts = async (postId) => {
+  const addBookmarkPosts = async (postId) => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(`/api/users/bookmark/${postId}`, {
         method: "POST",
-        headers: {authorization:`bearer${token}`},
+        headers: { authorization: `bearer${token}` },
       });
-      console.log(response)
+      console.log(response);
       const data = await response.json();
-      console.log(data)
-      dispatch({ type: "GET_BOOKMARK_POSTS", payload: data.bookmarks });
+      console.log(data);
+      dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
     } catch (e) {
       console.error(e);
     }
   };
 
   useEffect(() => {
-    fetchBookmarkPosts();
+    addBookmarkPosts();
   }, []);
+
+  const removeBookmarkPosts = async (postId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
+        method: "POST",
+        headers: { authorization: `bearer${token}` },
+      });
+      console.log(response)
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data);
+        dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload: postId});
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  console.log(state.bookmarkPosts)
+
+  useEffect(() => {
+    removeBookmarkPosts();
+  }, []);
+  console.log(state.bookmarkPosts);
+
   return (
     <UserContext.Provider
       value={{
@@ -101,7 +130,8 @@ export default function UserProvider({ children }) {
         user,
         state,
         dispatch,
-        fetchBookmarkPosts,
+        addBookmarkPosts,
+        removeBookmarkPosts,
       }}
     >
       {children}

@@ -10,8 +10,9 @@ import { UserContext } from "../../contexts/UserContext";
 export default function Home() {
   const { posts, setPosts, onUsernameClickHandler } =
     useContext(FeatureContext);
-  const { user,dispatch,fetchBookmarkPosts} = useContext(UserContext);
-  console.log(user);
+  const { user, dispatch, addBookmarkPosts, removeBookmarkPosts, state } =
+    useContext(UserContext);
+  console.log(state?.bookmarkPosts);
   const [sortOrder, setSortOrder] = useState(null);
   // const { getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
 
@@ -24,25 +25,22 @@ export default function Home() {
   //   setShowLikedPost(true);
   // };
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  console.log(socialUser)
 
-  const getUserPosts = async(username)=>{
-    try{
-      const response = await fetch(`/api/posts/user/${username}`,{
-        method:"GET"
-      })
-      const data = await response.json()
-      console.log("posts",data)
-      dispatch({type:"GET_USER_POSTS",payload:data.posts})
-
+  const getUserPosts = async (username) => {
+    try {
+      const response = await fetch(`/api/posts/user/${username}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+      console.log("posts", data);
+      dispatch({ type: "GET_USER_POSTS", payload: data.posts });
+    } catch (e) {
+      console.error(e);
     }
-    catch(e){
-      console.error(e)
-    }
-  }
-  useEffect(()=>{
-    getUserPosts()
-  },[])
+  };
+  useEffect(() => {
+    getUserPosts();
+  }, []);
 
   const handleSortedPost = () => {
     if (!sortOrder) {
@@ -54,51 +52,38 @@ export default function Home() {
       setPosts([...posts]);
     }
   };
-  
-  const loggedInUserPosts = posts?.filter(post => post?.username === socialUser?.username);
-console.log(loggedInUserPosts)
+
+  const loggedInUserPosts = posts?.filter(
+    (post) => post?.username === socialUser?.username
+  );
 
   const followingPosts = posts.filter((post) =>
     user?.following?.some((el) => el.username === post.username)
   );
 
-  const handleBookMark = (id)=>{
-    fetchBookmarkPosts(id)
-  }
-  console.log(posts);
-  console.log(followingPosts);
+   const isBookmarked = (id)=>state?.bookmarkPosts?.some(({ _id }) => _id === id);
 
-  const allPosts = [...loggedInUserPosts,...followingPosts]
+  const allPosts = [...loggedInUserPosts, ...followingPosts];
+
   return (
     <div>
       <SideBar />
       <Suggestions />
       <ul>
         <button onClick={handleSortedPost}>Latest Post</button>
-       
-        {/* {loggedInUserPosts.map(post=><li>{post.content} */}
-        
-        {/* </li>)} */}
 
         {allPosts.map((post) => (
-          <li>{post.content}
-         <span onClick={()=>handleBookMark(post._id)}> <i className="fa fa-bookmark"></i></span>
+          <li>
+            {post.content}
+            {isBookmarked(post._id) ?<span onClick={() => removeBookmarkPosts(post._id)}>
+              <i className="far fa-bookmark"></i>
+            </span>:<span onClick={() => addBookmarkPosts(post._id)}>
+              <i className="fa fa-bookmark"></i>
+            </span>}
+            
+            
           </li>
         ))}
-        {/* <div>
-                {showlikedPost && (
-                  <span onClick={() => handleUnlikePost(_id)}>
-                    <i className="fa fa-heart"></i>
-                  </span>
-                ) }
-                {!showlikedPost&&
-                  <span onClick={() => handleLikePost(_id)}>
-                  
-                    <i className="fa fa-heart"></i>
-                  </span>
-}
-              </div> */}
-              
       </ul>
     </div>
   );
