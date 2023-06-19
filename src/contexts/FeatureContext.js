@@ -34,7 +34,7 @@ export default function FeatureProvider({children}){
         navigate(`/profile/${name}`);
       };
     
-
+     
 // const getLikedPosts = async(postId)=>{
 //     try{
 //        const response = await fetch(`/api/posts/like/${postId}`,{

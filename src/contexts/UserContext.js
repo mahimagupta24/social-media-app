@@ -11,6 +11,8 @@ const userReducer = (state, action) => {
       return { ...state, users: action.payload };
     case "FOLLOW_USER":
       return { ...state, followUser: action.payload };
+      case"GET_USER_POSTS":
+      return {...state,userPosts:action.payload}
     default:
       return state;
   }
@@ -19,11 +21,11 @@ export default function UserProvider({ children }) {
   const initialState = {
     users: [],
     followUser: [],
+    userPosts:[]
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { user } = useContext(AuthContext);
-  console.log(user);
-  // const [suggestedUsers, setSuggestedUsers] = useState([]);
+
+   const [user,setUser]=useState(null)
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users", {
@@ -34,6 +36,7 @@ export default function UserProvider({ children }) {
         const data = await response.json();
         dispatch({ type: "GET_USERS", payload: data.users });
         console.log(data.users);
+      
         // const filteredUsers = data.users.filter(({ _id }) => _id !== user?._id);
         // console.log(filteredUsers);
         // setSuggestedUsers(filteredUsers);
@@ -58,6 +61,7 @@ export default function UserProvider({ children }) {
         const data = await response.json();
         console.log(data);
         dispatch({ type: "FOLLOW_USER", payload: data.user.following });
+        setUser(data.user)
         // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
       }
     } catch (e) {
@@ -68,9 +72,11 @@ export default function UserProvider({ children }) {
     followUsers();
   }, []);
 
+  
+
   return (
     <UserContext.Provider
-      value={{ state, getAllUsers, followUsers}}
+      value={{  getAllUsers, followUsers,user,state,dispatch}}
     >
       {children}
     </UserContext.Provider>
