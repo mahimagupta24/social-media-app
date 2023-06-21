@@ -1,0 +1,46 @@
+.auth-main{
+    display: flex;
+    justify-content: center;
+    margin-top:4rem
+
+}
+
+.auth-container{
+     display: flex; 
+    flex-direction: column; 
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2) ;
+  
+    justify-content: center;
+    padding-left:7rem;
+    
+}
+.auth-container input{
+    width: 15rem;
+}
+.login-heading{
+    padding-left:1.3rem
+
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    width:50%;  
+    gap:2rem;
+    align-items: center;
+}
+.email{
+    display: flex;
+    flex-direction: column;
+}
+.password{
+    display: flex;
+    flex-direction: column;
+}
+#login-btn{
+    margin-bottom: 12px;
+    width:15rem;
+}
+
+.account-btn{
+    margin-bottom: 12px;
+}
