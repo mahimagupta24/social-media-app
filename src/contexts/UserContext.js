@@ -10,7 +10,7 @@ const userReducer = (state, action) => {
     case "GET_USERS":
       return { ...state, users: action.payload };
     case "FOLLOW_USER":
-      return { ...state, followUser: action.payload };
+      return { ...state,user:action.payload.user, followUser: action.payload.followUser };
     case "ADD_BOOKMARK_POSTS":
       return { ...state, bookmarkPosts: action.payload };
     case "REMOVE_BOOKMARK_POSTS":
@@ -24,12 +24,14 @@ const userReducer = (state, action) => {
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
-    followUser: [],
     bookmarkPosts: [],
+    user:{},
+    followUser:{}
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users", {
@@ -59,12 +61,14 @@ export default function UserProvider({ children }) {
       const response = await fetch(`/api/users/follow/${followId}`, {
         method: "POST",
         headers: { authorization: `bearer${token}` },
+        body: JSON.stringify({}),
       });
+      console.log(response)
       if (response.status === 200) {
         const data = await response.json();
         console.log(data);
-        dispatch({ type: "FOLLOW_USER", payload: data.user.following });
-        setUser(data.user);
+        dispatch({ type: "FOLLOW_USER", payload: data });
+        // setUser(data.user);
         // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
       }
     } catch (e) {
@@ -124,11 +128,11 @@ export default function UserProvider({ children }) {
       value={{
         getAllUsers,
         followUsers,
-        user,
         state,
         dispatch,
         addBookmarkPosts,
         removeBookmarkPosts,
+        
       }}
     >
       {children}

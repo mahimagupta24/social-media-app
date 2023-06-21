@@ -9,7 +9,7 @@ export default function FeatureProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
-  const [likedPosts,setLikedPosts] = useState([])
+  const [likedPosts, setLikedPosts] = useState([]);
 
   const fetchAllPosts = async () => {
     try {
@@ -31,28 +31,45 @@ export default function FeatureProvider({ children }) {
     fetchAllPosts();
   }, []);
 
-  // const addNewPost = async()=>{
-  //   const token = localStorage.getItem("token")
-  //   try{
-  //    const response = await fetch("/api/posts/",{
-  //     method:"POST",
-  //     headers:{authorization:token},
-  //     body:JSON.stringify({postData:newPost})
-  //    })
+  const addNewPost = async (postText) => {
+    const postData = {
+      content: postText,
+    };
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch("/api/posts/", {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData }),
+      });
 
-  //    if(response.status===201){
-  //     const data = await response.json()
-  //       // setUserPosts(...userPosts,data.posts)
-  //       // console.log("userPosts",userPosts)
-  //     //  setPosts([...userPosts,newPost])
-  //    }
-  //   }catch(e){
-  //     console.error(e)
-  //   }
-  // }
-  // useEffect(()=>{
-  //   addNewPost()
-  // },[])
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data);
+        setPosts(data.posts);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const deletePosts = async (postId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: { authorization: token },
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        const data = await response.json();
+        console.log(data);
+        setPosts(data.posts);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const getUserPosts = async (username) => {
     try {
@@ -71,51 +88,50 @@ export default function FeatureProvider({ children }) {
     getUserPosts();
   }, []);
 
-  const getLikedPosts = async(postId)=>{
-    const token = localStorage.getItem("token")
-      try{
-         const response = await fetch(`/api/posts/like/${postId}`,{
-          method: "POST",
-          headers: { authorization: token
-       },
-
-        } );
-        console.log(response)
-         const data =await response.json()
-         console.log(data)
-         setLikedPosts(data.posts)
-        //  console.log(likedPosts)
-      }catch(e){
-          console.error(e)
+  const getLikedPosts = async (postId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`/api/posts/like/${postId}`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({}),
+      });
+      console.log(response);
+      if (response.status === 200 || response.status === 201) {
+        const data = await response.json();
+        // console.log(data.posts);
+        setPosts(data.posts);
       }
-  }
-  useEffect(()=>{
-      getLikedPosts()
-  },[])
+      //  console.log(likedPosts)
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    getLikedPosts();
+  }, []);
 
-  const getUnLikedPosts = async(postId)=>{
-      const token = localStorage.getItem("token")
-      try{
-         const response = await fetch(`/api/posts/dislike/${postId}`,{
-          method: "POST",
-          headers: { authorization: `bearer${token}`
-       },
-
-        } );
-          if(response.status===200){
-      //    console.log(response)
-         const data =await response.json()
-         setLikedPosts(data.posts)
-         console.log(data.posts)
-      }}catch(e){
-          console.error(e)
+  const getUnLikedPosts = async (postId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`/api/posts/dislike/${postId}`, {
+        method: "POST",
+        headers: { authorization: `bearer${token}` },
+        body: JSON.stringify({}),
+      });
+      if (response.status === 200 || response.status === 201) {
+        //    console.log(response)
+        const data = await response.json();
+        setPosts(data.posts);
+        // console.log(data.posts);
       }
-  }
-  useEffect(()=>{
-      getUnLikedPosts()
-  },[])
-
-  
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    getUnLikedPosts();
+  }, []);
 
   return (
     <FeatureContext.Provider
@@ -127,8 +143,10 @@ export default function FeatureProvider({ children }) {
         setNewPost,
         getLikedPosts,
         getUnLikedPosts,
-        likedPosts
-        // addNewPost,
+        likedPosts,
+        addNewPost,
+        newPost,
+        deletePosts,
       }}
     >
       {children}

@@ -16,9 +16,9 @@ export const users = [
     createdAt: "2022-03-16T10:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
-      { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
-      { _id: uuid(), fullname: "Mahima Gupta", username: "mahimagupta" },
-      { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
+      // { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
+      // { _id: uuid(), fullname: "Mahima Gupta", username: "mahimagupta" },
+      // { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
     ],
     following: [
     ],
@@ -33,15 +33,15 @@ export const users = [
     createdAt: "2022-05-06T12:45:00+05:30",
     updatedAt: formatDate(),
     followers: [
-      { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
+      // { _id: uuid(), fullname: "Raima Gupta", username: "raimagupta" },
     ],
     following: [
-      { _id: uuid(), fullname: "John Doe", username: "johndoe" },
-      {
-        _id: uuid(),
-        fullname: "Adarsh Balika",
-        username: "adarshbalika",
-      },
+      // { _id: uuid(), fullname: "John Doe", username: "johndoe" },
+      // {
+      //   _id: uuid(),
+      //   fullname: "Adarsh Balika",
+      //   username: "adarshbalika",
+      // },
     ],
   },
   {
@@ -54,10 +54,10 @@ export const users = [
     createdAt: "2022-01-18T22:00:10+05:30",
     updatedAt: formatDate(),
     followers: [
-      { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
-    ],
+    //   { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
+     ],
     following: [
-      { _id: uuid(), fullname: "Adarsh Balika", username: "adarshbalika" },
+      // { _id: uuid(), fullname: "Adarsh Balika", username: "adarshbalika" },
     ],
   },
   {
@@ -70,20 +70,20 @@ export const users = [
     createdAt: "2022-07-26T11:20:10+05:30",
     updatedAt: formatDate(),
     followers: [
-      {
-        _id: uuid(),
-        fullname: "John Doe",
-        username: "johndoe",
-      },
+      // {
+      //   _id: uuid(),
+      //   fullname: "John Doe",
+      //   username: "johndoe",
+      // },
     ],
     following: [
-      { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
-      { _id: uuid(), fullname: "Adarsh Balika", username: "adarshbalika" },
-      {
-        _id: uuid(),
-        fullname: "John Doe",
-        username: "johndoe",
-      },
+      // { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
+      // { _id: uuid(), fullname: "Adarsh Balika", username: "adarshbalika" },
+      // {
+      //   _id: uuid(),
+      //   fullname: "John Doe",
+      //   username: "johndoe",
+      // },
     ],
   },
   {
@@ -95,23 +95,23 @@ export const users = [
     bookmarks:[],
     createdAt: "2022-02-04T08:35:30+05:30",
     updatedAt: formatDate(),
-    follower: [
-      {
-        _id: uuid(),
-        fullname: "Shubham Soni",
-        username: "shubhamsoni",
-      },
-      {
-        _id: uuid(),
-        fullname: "Raima Gupta",
-        username: "raimagupta",}
+     followers: [
+    //   {
+    //     _id: uuid(),
+    //     fullname: "Shubham Soni",
+    //     username: "shubhamsoni",
+    //   },
+    //   {
+    //     _id: uuid(),
+    //     fullname: "Raima Gupta",
+    //     username: "raimagupta",}
     ],
     following: [
-      {
-        _id: uuid(),
-        fullname: "Raima Gupta",
-        username: "raimagupta",
-      },
+      // {
+      //   _id: uuid(),
+      //   fullname: "Raima Gupta",
+      //   username: "raimagupta",
+      // },
     ],
   },
 ];
