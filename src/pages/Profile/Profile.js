@@ -13,15 +13,18 @@ export default function Profile() {
   const { state,followUsers} = useContext(UserContext);
   const { userPosts} = useContext(FeatureContext);
 
-  console.log(state.followUser)
-console.log(state.user)
+  // console.log(state.followUser)
+console.log(user)
    const suggestedUsers = state.users.filter(({ _id }) => _id !== user._id);
    console.log(suggestedUsers);
 
    const suggestedUser = suggestedUsers.find(user=>user.username===username)
+   console.log(username)
   // const loggedInUserPosts = userPosts.filter(
   //   ({ username }) => username === user.username
   // );
+  console.log(suggestedUser);
+  const [isProfileEditMode,setIsProfileEditMode] = useState(false)
 
 
   
@@ -37,7 +40,7 @@ console.log(state.user)
         </div>
       ) : (
         <div>
-          <p>{state.followUser?.fullname}</p>
+          <p>{suggestedUser?.fullname}</p>
           <p>@{username}</p>
           <p>{suggestedUser?.bio}</p>
           <p><span>Followers:{suggestedUser?.followers.length}</span><span>Following:{suggestedUser?.following.length}</span></p>

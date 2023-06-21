@@ -43,10 +43,11 @@ export function makeServer({ environment = "development" } = {}) {
       server.logging = false;
       users.forEach((item) =>
         server.create("user", {
+          bookmarks: [],
           ...item,
           // followers: [],
           // following: [],
-          bookmarks: [],
+          
         })
       );
       posts.forEach((item) => server.create("post", { ...item }));

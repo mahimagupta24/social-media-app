@@ -14,8 +14,8 @@ const userReducer = (state, action) => {
     case "ADD_BOOKMARK_POSTS":
       return { ...state, bookmarkPosts: action.payload };
     case "REMOVE_BOOKMARK_POSTS":
-      const filteredPosts = state.bookmarkPosts.filter(({_id})=>_id!==action.payload)
-      return { ...state, bookmarkPosts: filteredPosts };
+      //  const filteredPosts = state.bookmarkPosts.filter(({_id})=>_id!==action.payload)
+      return { ...state, bookmarkPosts: action.payload };
     default:
       return state;
   }
@@ -24,7 +24,7 @@ const userReducer = (state, action) => {
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
-    bookmarkPosts: [],
+     bookmarkPosts: [],
     user:{},
     followUser:{}
   };
@@ -84,7 +84,8 @@ export default function UserProvider({ children }) {
     try {
       const response = await fetch(`/api/users/bookmark/${postId}`, {
         method: "POST",
-        headers: { authorization: `bearer${token}` },
+        headers: { authorization: token },
+        body: JSON.stringify({}),
       });
       console.log(response);
       const data = await response.json();
@@ -104,24 +105,23 @@ export default function UserProvider({ children }) {
     try {
       const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
         method: "POST",
-        headers: { authorization: `bearer${token}` },
+        headers: { authorization: token },
+        body: JSON.stringify({}),
       });
       console.log(response)
-      if (response.status === 200) {
+      // if (response.status === 200) {
         const data = await response.json();
         console.log(data);
-        dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload: postId});
-      }
+        dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload:data.bookmarks});
+      // }
     } catch (e) {
       console.error(e);
     }
   };
-  console.log(state.bookmarkPosts)
 
   useEffect(() => {
     removeBookmarkPosts();
   }, []);
-  console.log(state.bookmarkPosts);
 
   return (
     <UserContext.Provider

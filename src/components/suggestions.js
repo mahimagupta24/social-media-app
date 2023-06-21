@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Suggestions() {
   const { state, followUsers,getAllUsers  } = useContext(UserContext);
   const {user} = useContext(AuthContext)
-const suggestedUsers = state.users.filter(({_id})=>_id!==user._id)
+const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
 console.log(suggestedUsers)
 
   const handleFollow = (id) => {
@@ -17,7 +17,7 @@ console.log(suggestedUsers)
   return (
     <div>
       <h1>Suggested users</h1>
-      {suggestedUsers.map(({ _id, fullname, username }) => (
+      {suggestedUsers?.map(({ _id, fullname, username }) => (
         <div key={_id}>
           <li>{fullname}</li>
           <li>@{username}</li>

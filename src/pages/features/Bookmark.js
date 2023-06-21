@@ -7,8 +7,8 @@ export default function Bookmark() {
 
   return (
     <div>
-      {state?.bookmarkPosts?.map(({ firstName, lastName,content }) => (
-        <li>
+      {state?.bookmarkPosts?.map(({ _id,firstName, lastName,content }) => (
+        <li key={_id}>
           <p>
             {firstName} {lastName}
             

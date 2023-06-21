@@ -21,6 +21,7 @@ export default function Home() {
   } = useContext(FeatureContext);
   const { user, dispatch, addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
+
   console.log(state?.bookmarkPosts);
   // const { getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
 
@@ -32,11 +33,12 @@ export default function Home() {
   //   getUnLikedPosts(postId);
   //   setShowLikedPost(true);
   // };
+
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   useEffect(() => {
-    getUserPosts(user?.username);
-  }, [user?.username]);
+    getUserPosts(socialUser.username);
+  }, [socialUser.username]);
 
   // const postLikings = posts.filter((post) => post?.likes?.likedBy?.length > 0);
   // const sortLikedPosts = [
@@ -61,12 +63,10 @@ export default function Home() {
   );
 
   const followingPosts = posts?.filter((post) =>
-    user?.following?.some((el) => el.username === post.username)
+    socialUser?.following?.some((el) => el.username === post.username)
   );
 
-  const isBookmarked = (id) =>
-    state?.bookmarkPosts?.some(({ _id }) => _id === id);
-
+  
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
   const handlePostSubmit = (e) => {
@@ -78,6 +78,10 @@ export default function Home() {
   const handlePostChange = (e) => {
     setNewPost(e.target.value);
   };
+
+  // const isBookmarked = (postId) => {
+  //   return state?.bookmarkPosts?.some((bookmark) => bookmark.postId === postId);
+  // };
   return (
     <div>
       <SideBar />
@@ -88,8 +92,8 @@ export default function Home() {
       <button>Latest Post</button>
       <ul>
         {allPosts.map((post) => {
-          const myUsername = socialUser.username;
-          const isLiked = post.likes.likedBy.some(
+          const myUsername = socialUser?.username;
+          const isLiked = post?.likes?.likedBy.some(
             (user) => user.username === myUsername
           );
           return (
@@ -112,24 +116,24 @@ export default function Home() {
               </div>
               <p>{post.content}</p>
               <button onClick={() => deletePosts(post._id)}>Delete</button>
-              {isBookmarked(post._id) ? (
+               
                 <span onClick={() => removeBookmarkPosts(post._id)}>
                   <i className="fa fa-bookmark"></i>
                 </span>
-              ) : (
-                <span onClick={() => addBookmarkPosts(post._id)}>
-                  <i className="far fa-bookmark"></i>
+               
+                <span  style={{ color: "red" }}onClick={() => addBookmarkPosts(post._id)}>
+                  <i className="fa fa-bookmark"></i>
                 </span>
-              )}
+        
               {isLiked ? (
-                <span
-                  style={{ color: "pink" }}
-                  onClick={() => getUnLikedPosts(post._id)}
-                >
+                <span onClick={() => getUnLikedPosts(post._id)}>
                   <i className="fa fa-heart"></i>
                 </span>
               ) : (
-                <span onClick={() => getLikedPosts(post._id)}>
+                <span
+                  style={{ color: "red" }}
+                  onClick={() => getLikedPosts(post._id)}
+                >
                   <i className="fa fa-heart"></i>
                 </span>
               )}
