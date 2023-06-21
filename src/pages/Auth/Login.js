@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import "./Auth.css"
 
 export default function Login() {
  
@@ -31,9 +32,13 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={onLoginSubmitHandler}>
+    <div className="auth-main">
+      <div className="auth-container">
+        <div>
+      <h1 className="auth-heading">Login</h1>
+      </div>
+      <form className="details" onSubmit={onLoginSubmitHandler}>
+        <div className="email">
         <label>Email</label>
         <input
           value={loginDetails.username}
@@ -42,8 +47,10 @@ export default function Login() {
           }
           required
         />
+        </div>
+        <div className="password">
         <label>Password</label>
-        <input
+        <input 
           value={loginDetails.password}
           type="password"
           onChange={(e) =>
@@ -51,12 +58,14 @@ export default function Login() {
           }
           required
         />
+        </div>
         <button type="submit">Login</button>
-        <button onClick={guestLoginHandler}>Guest login</button>
+        <button id="login-btn"onClick={guestLoginHandler}>Guest login</button>
         <p>
           Don't have an account?<Link to="/signup">Signup</Link>
         </p>
       </form>
+    </div>
     </div>
   );
 }

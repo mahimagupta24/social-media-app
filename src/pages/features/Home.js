@@ -19,12 +19,11 @@ export default function Home() {
     newPost,
     deletePosts,
   } = useContext(FeatureContext);
-  const { user, dispatch, addBookmarkPosts, removeBookmarkPosts, state } =
+
+  const { addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
 
-  console.log(state?.bookmarkPosts);
-  // const { getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
-
+    const {user} = useContext(AuthContext)
   // const handleLikePost = (postId) => {
   //   getLikedPosts(postId);
   // };
@@ -35,6 +34,8 @@ export default function Home() {
   // };
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  console.log(user);
 
   useEffect(() => {
     getUserPosts(socialUser.username);
@@ -57,31 +58,39 @@ export default function Home() {
   //     setPosts([...posts]);
   //   }
   // };
-  console.log(posts);
+
   const loggedInUserPosts = posts?.filter(
     (post) => post?.username === socialUser?.username
   );
 
+
   const followingPosts = posts?.filter((post) =>
-    socialUser?.following?.some((el) => el.username === post.username)
+    user?.following?.some((el) => el.username === post.username)
   );
 
-  
+  // console.log(followingPosts);
+
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
-  const handlePostSubmit = (e) => {
+  const handlePostSubmit = () => {
     addNewPost(newPost);
     setNewPost("");
-    console.log("abc");
   };
 
   const handlePostChange = (e) => {
     setNewPost(e.target.value);
   };
 
-  // const isBookmarked = (postId) => {
-  //   return state?.bookmarkPosts?.some((bookmark) => bookmark.postId === postId);
-  // };
+  // const isBookmarked = user?.bookmarkPosts?.some(
+  //   (bookmark) => bookmark.username === socialUser.username
+  // );
+  
+    const isBookmarked = (postId)=>user?.bookmarks?.find(
+      (bookmark) => bookmark._id === postId
+    );
+  
+   
+
   return (
     <div>
       <SideBar />
@@ -96,6 +105,7 @@ export default function Home() {
           const isLiked = post?.likes?.likedBy.some(
             (user) => user.username === myUsername
           );
+          const isOwner = post?.username === socialUser?.username;
           return (
             <li key={post._id}>
               <div>
@@ -115,16 +125,21 @@ export default function Home() {
                 )}
               </div>
               <p>{post.content}</p>
-              <button onClick={() => deletePosts(post._id)}>Delete</button>
-               
-                <span onClick={() => removeBookmarkPosts(post._id)}>
+              {isOwner&&<button onClick={() => deletePosts(post._id)}>Delete</button>}
+              {isBookmarked(post._id)? <span onClick={() => removeBookmarkPosts(post._id)}>
                   <i className="fa fa-bookmark"></i>
                 </span>
-               
-                <span  style={{ color: "red" }}onClick={() => addBookmarkPosts(post._id)}>
+          :
+                <span
+                  style={{ color: "red" }}
+                  onClick={() => addBookmarkPosts(post._id)}
+                >
                   <i className="fa fa-bookmark"></i>
                 </span>
-        
+            }
+              
+               
+
               {isLiked ? (
                 <span onClick={() => getUnLikedPosts(post._id)}>
                   <i className="fa fa-heart"></i>

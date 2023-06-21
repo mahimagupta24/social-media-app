@@ -10,16 +10,17 @@ export default function FeatureProvider({ children }) {
   const [userPosts, setUserPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [likedPosts, setLikedPosts] = useState([]);
+  
 
   const fetchAllPosts = async () => {
     try {
       const response = await fetch("/api/posts", {
         method: "GET",
       });
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setPosts(data.posts);
       }
     } catch (e) {
@@ -74,11 +75,11 @@ export default function FeatureProvider({ children }) {
   const getUserPosts = async (username) => {
     try {
       const response = await fetch(`/api/posts/user/${username}`);
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         const data = await response.json();
         setUserPosts(data.posts);
-        console.log(data.posts);
+        // console.log(data.posts);
       }
     } catch (e) {
       console.error(e);
@@ -96,7 +97,7 @@ export default function FeatureProvider({ children }) {
         headers: { authorization: token },
         body: JSON.stringify({}),
       });
-      console.log(response);
+      // console.log(response);
       if (response.status === 200 || response.status === 201) {
         const data = await response.json();
         // console.log(data.posts);

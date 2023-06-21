@@ -15,7 +15,9 @@ const authReducer = (state, action) => {
 };
 export default function AuthProvider({ children }) {
   const navigate = useNavigate()
+
   const [user, setUser] = useState(null);
+  
   const [state, dispatch] = useReducer(authReducer, initialState);
  
 
@@ -68,7 +70,7 @@ const isLoggedIn = state.encodedToken.length!==0
   }
 
   return (
-    <AuthContext.Provider value={{ state,signupHandler, loginHandler, user,logoutHandler,isLoggedIn }}>
+    <AuthContext.Provider value={{ state,signupHandler, loginHandler, user,logoutHandler,isLoggedIn,setUser }}>
       {children}
     </AuthContext.Provider>
   );

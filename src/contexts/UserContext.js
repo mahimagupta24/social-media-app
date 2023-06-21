@@ -9,13 +9,7 @@ const userReducer = (state, action) => {
   switch (action.type) {
     case "GET_USERS":
       return { ...state, users: action.payload };
-    case "FOLLOW_USER":
-      return { ...state,user:action.payload.user, followUser: action.payload.followUser };
-    case "ADD_BOOKMARK_POSTS":
-      return { ...state, bookmarkPosts: action.payload };
-    case "REMOVE_BOOKMARK_POSTS":
-      //  const filteredPosts = state.bookmarkPosts.filter(({_id})=>_id!==action.payload)
-      return { ...state, bookmarkPosts: action.payload };
+   
     default:
       return state;
   }
@@ -24,28 +18,24 @@ const userReducer = (state, action) => {
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
-     bookmarkPosts: [],
-    user:{},
-    followUser:{}
+   
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  // const [user, setUser] = useState(null);
+   const {user, setUser} = useContext(AuthContext);
 
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users", {
         method: "GET",
       });
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         const data = await response.json();
         dispatch({ type: "GET_USERS", payload: data.users });
-        console.log(data.users);
+        // console.log(data.users);
 
-        // const filteredUsers = data.users.filter(({ _id }) => _id !== user?._id);
-        // console.log(filteredUsers);
-        // setSuggestedUsers(filteredUsers);
+        
       }
     } catch (e) {
       console.error(e);
@@ -63,12 +53,12 @@ export default function UserProvider({ children }) {
         headers: { authorization: `bearer${token}` },
         body: JSON.stringify({}),
       });
-      console.log(response)
+      // console.log(response)
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
-        dispatch({ type: "FOLLOW_USER", payload: data });
-        // setUser(data.user);
+         console.log(data);
+        // dispatch({ type: "FOLLOW_USER", payload: data });
+         setUser((user=>({...user,following:data.user.following})))
         // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
       }
     } catch (e) {
@@ -90,7 +80,9 @@ export default function UserProvider({ children }) {
       console.log(response);
       const data = await response.json();
       console.log(data);
-      dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
+      // dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
+      setUser(user=>({...user,bookmarks:data.bookmarks}))
+      console.log(user)
     } catch (e) {
       console.error(e);
     }
@@ -109,11 +101,12 @@ export default function UserProvider({ children }) {
         body: JSON.stringify({}),
       });
       console.log(response)
-      // if (response.status === 200) {
+      if (response.status === 200) {
         const data = await response.json();
         console.log(data);
-        dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload:data.bookmarks});
-      // }
+        // dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload:data.bookmarks});
+        setUser(user=>({...user,bookmarks:data.bookmarks}))
+       }
     } catch (e) {
       console.error(e);
     }
