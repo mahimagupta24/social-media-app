@@ -35,7 +35,7 @@ export default function Home() {
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  console.log(user);
+  console.log(posts);
 
   useEffect(() => {
     getUserPosts(socialUser.username);
@@ -81,9 +81,7 @@ export default function Home() {
     setNewPost(e.target.value);
   };
 
-  // const isBookmarked = user?.bookmarkPosts?.some(
-  //   (bookmark) => bookmark.username === socialUser.username
-  // );
+
   
     const isBookmarked = (postId)=>user?.bookmarks?.find(
       (bookmark) => bookmark._id === postId
@@ -137,9 +135,6 @@ export default function Home() {
                   <i className="fa fa-bookmark"></i>
                 </span>
             }
-              
-               
-
               {isLiked ? (
                 <span onClick={() => getUnLikedPosts(post._id)}>
                   <i className="fa fa-heart"></i>
@@ -151,7 +146,9 @@ export default function Home() {
                 >
                   <i className="fa fa-heart"></i>
                 </span>
+               
               )}
+              <span><i className="fa fa-comment"></i>{post.comments.length}</span>
             </li>
           );
         })}
