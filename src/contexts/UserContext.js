@@ -9,7 +9,8 @@ const userReducer = (state, action) => {
   switch (action.type) {
     case "GET_USERS":
       return { ...state, users: action.payload };
-   
+   case"ADD_BOOKMARK_POSTS":
+   return {...state,bookmarks:action.payload}
     default:
       return state;
   }
@@ -18,6 +19,7 @@ const userReducer = (state, action) => {
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
+    bookmarks:[]
    
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
@@ -69,6 +71,7 @@ export default function UserProvider({ children }) {
     followUsers();
   }, []);
 
+  
   const addBookmarkPosts = async (postId) => {
     const token = localStorage.getItem("token");
     try {
@@ -80,9 +83,9 @@ export default function UserProvider({ children }) {
       console.log(response);
       const data = await response.json();
       console.log(data);
-      // dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
+       dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
       setUser(user=>({...user,bookmarks:data.bookmarks}))
-      console.log(user)
+     
     } catch (e) {
       console.error(e);
     }

@@ -12,10 +12,11 @@ export const posts = [
     content: "Exploring new places",
     mediaUrl:"https://1.bp.blogspot.com/-MiUcyHifn1U/XrvfpVzmI7I/AAAAAAAAAjc/eYazSDwPLasqFXYX7bx_yJUipkZ8Ci5IQCLcBGAsYHQ/s1600/tea-gardens-munnar.jpg",
     likes: {
-      likeCount: 0,
+      likeCount: 4,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -40,10 +41,11 @@ export const posts = [
     content: "Enjoying a beautiful sunset!",
     mediaUrl:"https://tse4.mm.bing.net/th?id=OIP.IwYFjR9kEWVWqXq4g1jpOAHaEK&pid=Api&P=0&h=180",
     likes: {
-      likeCount: 0,
+      likeCount: 3,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [],
     firstName: "Shubham",
     lastName: "Soni",
@@ -58,12 +60,12 @@ export const posts = [
     content: "Delicious food at my favorite restaurant!",
     mediaUrl:"https://wallpapercave.com/wp/wp3724331.jpg",
     likes: {
-      likeCount: 0,
+      likeCount: 5,
       likedBy: [],
       dislikedBy: [],
     },
    
-
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -87,10 +89,11 @@ export const posts = [
     _id: uuid(),
     content: "Excited for the weekend getaway!",
     likes: {
-      likeCount: 0,
+      likeCount: 7,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -113,10 +116,11 @@ export const posts = [
     _id: uuid(),
     content: "The best way to predict your future is to create it! Love this quote by Ibrahim Lincon",
     likes: {
-      likeCount: 0,
+      likeCount: 1,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -139,10 +143,11 @@ export const posts = [
     _id: uuid(),
     content: "Having a great time with friends!",
     likes: {
-      likeCount: 0,
+      likeCount: 8,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [],
     firstName: "John",
     lastName: "Doe",
@@ -155,10 +160,11 @@ export const posts = [
     _id: uuid(),
     content: "Celebrating a milestone achievement!",
     likes: {
-      likeCount: 0,
+      likeCount: 15,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -181,10 +187,11 @@ export const posts = [
     _id: uuid(),
     content: "Trying out a new recipe. Finger-licking good!",
     likes: {
-      likeCount: 0,
+      likeCount: 9,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [
       {
         _id: uuid(),
@@ -207,10 +214,11 @@ export const posts = [
     _id: uuid(),
     content: "Feeling grateful for the little things in life",
     likes: {
-      likeCount: 0,
+      likeCount: 12,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [],
     firstName: "Shubham",
     lastName: "Soni",
@@ -223,10 +231,11 @@ export const posts = [
     _id: uuid(),
     content: "Believe in yourself. You are capable of amazing things",
     likes: {
-      likeCount: 0,
+      likeCount: 11,
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [],
     firstName: "Adarsh",
     lastName: "Balika",
@@ -244,6 +253,7 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    bookmarks:[],
     comments: [],
     firstName: "Raima",
     lastName: "Gupta",
@@ -258,11 +268,12 @@ export const posts = [
       "Wow, the weather is absolutely gorgeous today! Perfect day for some outdoor activities!",
     mediaUrl:"https://jooinn.com/images/cloudy-1.jpg",
       likes: {
-      likeCount: 0,
+      likeCount: 17,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
+    bookmarks:[],
     firstName: "Shubham",
     lastName: "Soni",
     username: "shubhamsoni",
@@ -276,11 +287,12 @@ export const posts = [
       
     mediaUrl:"https://www.leafmarks.com/uploads/9/8/4/9/98493490/hamlet-by-william-shakespeare_orig.jpg",
       likes: {
-      likeCount: 0,
+      likeCount: 16,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
+    bookmarks:[],
     firstName: "Mahima",
     lastName: "Gupta",
     username: "mahimagupta",

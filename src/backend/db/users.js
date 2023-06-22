@@ -14,8 +14,9 @@ export const users = [
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
     bio: "Social Media Influencer",
     bookmarks:[],
-    createdAt: "2022-03-16T10:45:00+05:30",
+    // createdAt: "2022-03-16T10:45:00+05:30",
     updatedAt: formatDate(),
+    createdAt:formatDate(),
     followers: [
       // { _id: uuid(), fullname: "Shubham Soni", username: "shubhamsoni" },
       // { _id: uuid(), fullname: "Mahima Gupta", username: "mahimagupta" },
@@ -98,7 +99,8 @@ export const users = [
     profilePic:"https://wallpapercave.com/wp/wp2525371.jpg",
     bio: "What's up?",
     bookmarks:[],
-    createdAt: "2022-02-04T08:35:30+05:30",
+    createdAt:formatDate(),
+    // createdAt: "2022-02-04T08:35:30+05:30",
     updatedAt: formatDate(),
      followers: [
     //   {

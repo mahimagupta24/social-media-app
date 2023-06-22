@@ -1,0 +1,50 @@
+.profile-pic{
+    width: 50px;
+    border-radius: 50%;
+    height: 40px;
+    margin-top: 20px;
+    position: relative;  
+}
+.post-container{
+    display: flex;
+    justify-content: space-evenly;
+  
+}
+.post-list{
+    list-style: none;
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2) ;
+    text-align: center;
+    width:360px;
+    
+}
+p{
+overflow-wrap: normal;
+}
+.post-card{
+   display: flex;
+   flex-direction: column;
+   gap:1rem;
+}
+.btns{
+    display: flex;
+font-size:1rem;
+margin-left:1rem;
+/* justify-content: space-evenly; */
+gap:10px;
+}
+
+.sort-btns{
+    text-align: center;
+    display: flex;
+    gap:4px;
+    justify-content: center;
+}
+
+.added-post-card {
+    height: 100px; 
+    width: 360px;
+    border: none;
+  }
+  #post-btn{
+    margin-bottom:5px;
+  }

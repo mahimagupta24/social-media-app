@@ -1,0 +1,29 @@
+.suggestion-list{
+    list-style: none;
+    text-align: center;
+    
+}
+.suggestion-container{
+   border-left: 1px solid;
+}
+.profile-pic{
+    width: 50px;
+    border-radius: 50%;
+    height: 40px;
+    margin-top: 20px;
+    position: relative;  
+}
+/* side-bar */
+.side-bar-container{
+    border-right: 1px solid;
+}
+.side-bar-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:4rem;
+    
+}
+.icon{
+    margin-right:10px
+}

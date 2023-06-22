@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { AuthContext } from "../contexts/AuthContext";
-
+import "./components.css"
 export default function Suggestions() {
   const { state, followUsers,getAllUsers  } = useContext(UserContext);
   const {user} = useContext(AuthContext)
@@ -18,17 +18,21 @@ console.log(suggestedUsers)
     // console.log(updatedUsers)
   };
   return (
-    <div>
+    <div className="suggestion-container">
       <h1>Suggested users</h1>
-      {suggestedUsers?.map(({ _id, fullname, username }) => (
-        <div key={_id}>
-          <li>{fullname}</li>
-          <li>@{username}</li>
-          <li>
-            {" "}
+      {suggestedUsers?.map(({ _id, fullname, username ,profilePic}) => (
+        <div className="suggestion-list"key={_id}>
+          <img className="profile-pic"src={profilePic}/>
+          <div className="suggested-user-details">
+          <span><b>{fullname}</b></span>
+          <span>@{username}</span>
+          </div>
             <button onClick={() => handleFollow(_id)}>Follow</button>
-          </li>
-        </div>
+            <hr/>
+            </div>
+          
+        
+        
       ))}
     </div>
   );
