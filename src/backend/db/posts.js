@@ -186,6 +186,7 @@ export const posts = [
   {
     _id: uuid(),
     content: "Trying out a new recipe. Finger-licking good!",
+    mediaUrl:"https://www.teacher-chef.com/wp-content/uploads/2012/01/1-5-salsa-made-from-canned-tomato1.jpg",
     likes: {
       likeCount: 9,
       likedBy: [],
