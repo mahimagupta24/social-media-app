@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
 import { AuthContext } from "./AuthContext";
+import { FeatureContext } from "./FeatureContext";
 
 export const UserContext = createContext();
 const userReducer = (state, action) => {
@@ -25,6 +26,7 @@ export default function UserProvider({ children }) {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
    const {user, setUser} = useContext(AuthContext);
+   const{posts,setPosts} = useContext(FeatureContext)
 
   const getAllUsers = async () => {
     try {
@@ -85,6 +87,7 @@ export default function UserProvider({ children }) {
       console.log(data);
        dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
       setUser(user=>({...user,bookmarks:data.bookmarks}))
+       
      
     } catch (e) {
       console.error(e);

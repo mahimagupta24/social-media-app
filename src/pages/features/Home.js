@@ -96,15 +96,17 @@ export default function Home() {
 
      
       <ul className="post-card">
-        <div className="post-list">
+        <div className="add-post-container">
           <input className="added-post-card" placeholder="What is happening"onChange={handlePostChange} value={newPost} />
-          
+          </div>
+          <div>
           <button id="post-btn"onClick={handlePostSubmit}>Post</button>
           </div>
+          
       
           <div className="sort-btns">
-          <button onClick={handleSortedPost}>Latest Post</button>
-          <button onClick={sortLikedPosts}>Trending</button>
+          <button id="sort-btn"onClick={handleSortedPost}>Latest Post</button>
+          <button id="trending-btn"onClick={sortLikedPosts}>Trending</button>
           </div>
         {allPosts.map((post) => {
           const myUsername = socialUser?.username;
@@ -116,7 +118,7 @@ export default function Home() {
           return (
             <li className="post-list" key={post._id}>
               <div>
-                <img className="profile-pic" src={post.profilePic} />
+                <img className="profile-pic" src={post.profilePic}alt="profile" />
                 <span>
                   <b>
                     {post.firstName} {post.lastName}
@@ -132,15 +134,12 @@ export default function Home() {
                     alt="random"
                     height="250px"
                     width="300px"
+                    borderradius="2rem"
                   />
                 )}
               </div>
               <div className="btns">
-                {isOwner && (
-                  <span onClick={() => deletePosts(post._id)}>
-                    <i className="fa fa-trash"></i>
-                  </span>
-                )}
+               
                 {isBookmarked(post._id) ? (
                   <span
                     style={{ color: "red" }}
@@ -172,7 +171,13 @@ export default function Home() {
                   <i className="fa fa-comment"></i>
                   {post.comments?.length > 0 && post.comments?.length}
                 </span>
+                {isOwner && (
+                  <span onClick={() => deletePosts(post._id)}>
+                    <i className="fa fa-trash"></i>
+                  </span>
+                )}
               </div>
+             
             </li>
           );
         })}

@@ -5,6 +5,7 @@
 }
 .suggestion-container{
    border-left: 1px solid;
+   height:95%
 }
 .profile-pic{
     width: 50px;
@@ -14,16 +15,31 @@
     position: relative;  
 }
 /* side-bar */
-.side-bar-container{
-    border-right: 1px solid;
-}
+
 .side-bar-main{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap:4rem;
+    /* justify-content: space-evenly; */
+    gap:6rem;
+    height: 95%;
+    border-right:1px solid ;
+    text-align: center;
+    margin-left:0px;
     
+    
+}
+.side-bar-content{
+    margin-right:6rem;
+    font-size: 2rem;
+   
+}
+.side-bar-link{
+    text-decoration: none;
+    color:black
 }
 .icon{
     margin-right:10px
+}
+input::placeholder {
+    font: 1.25rem/3 sans-serif;
 }

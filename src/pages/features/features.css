@@ -5,6 +5,12 @@
     margin-top: 20px;
     position: relative;  
 }
+.profile-details{
+    margin-top:2px
+}
+.profile-username{
+    margin-top:12px
+}
 .post-container{
     display: flex;
     justify-content: space-evenly;
@@ -15,6 +21,8 @@
     box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2) ;
     text-align: center;
     width:360px;
+    border-radius: 0.5rem;
+   
     
 }
 p{
@@ -24,6 +32,8 @@ overflow-wrap: normal;
    display: flex;
    flex-direction: column;
    gap:1rem;
+  
+
 }
 .btns{
     display: flex;
@@ -31,20 +41,52 @@ font-size:1rem;
 margin-left:1rem;
 /* justify-content: space-evenly; */
 gap:10px;
+margin-bottom: 8px;
 }
 
 .sort-btns{
     text-align: center;
     display: flex;
-    gap:4px;
+    gap:8px;
     justify-content: center;
-}
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2) ;
+    height:12vh;
+    width:360px;
+  
 
+}
+#sort-btn{
+   
+    margin-top: 20px;
+    border:none;
+    background-color: white;
+    font: 1.25rem/3 sans-serif;
+    cursor: pointer;
+}
+#trending-btn{
+   
+    margin-top: 20px;
+    border:none;
+    background-color: white;
+    font: 1.25rem/3 sans-serif;
+    cursor: pointer;
+    border-left:1px solid;  
+    left: 50%;
+   
+}
 .added-post-card {
     height: 100px; 
     width: 360px;
     border: none;
   }
+
+  .add-post-container{
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2) ;
+    width:360px
+  }
   #post-btn{
     margin-bottom:5px;
+    margin-left:18rem;
+    width:4rem;
+    
   }
