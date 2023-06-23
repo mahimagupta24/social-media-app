@@ -18,6 +18,7 @@ export default function Home() {
     getUnLikedPosts,
     newPost,
     deletePosts,
+
   } = useContext(FeatureContext);
 
   const { addBookmarkPosts, removeBookmarkPosts, state } =
@@ -102,7 +103,7 @@ export default function Home() {
           <div>
           <button id="post-btn"onClick={handlePostSubmit}>Post</button>
           </div>
-          
+       
       
           <div className="sort-btns">
           <button id="sort-btn"onClick={handleSortedPost}>Latest Post</button>
@@ -172,9 +173,12 @@ export default function Home() {
                   {post.comments?.length > 0 && post.comments?.length}
                 </span>
                 {isOwner && (
+                  <div>
+                  <button>Edit</button>
                   <span onClick={() => deletePosts(post._id)}>
                     <i className="fa fa-trash"></i>
                   </span>
+                  </div>
                 )}
               </div>
              

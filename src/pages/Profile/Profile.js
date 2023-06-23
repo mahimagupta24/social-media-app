@@ -4,61 +4,56 @@ import { FeatureContext } from "../../contexts/FeatureContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 
+
 export default function Profile() {
   const { username } = useParams();
 
    const { user } = useContext(AuthContext);
-// console.log(user)
-// console.log(user?.following)
-  const { state,followUsers} = useContext(UserContext);
+ 
+  const { state} = useContext(UserContext);
   const { userPosts} = useContext(FeatureContext);
-
-  // console.log(state.followUser)
-console.log(user)
+  
+  console.log(state.users)
    const suggestedUsers = state.users.filter(({ _id }) => _id !== user._id);
    console.log(suggestedUsers);
 
    const suggestedUser = suggestedUsers.find(user=>user.username===username)
-   console.log(username)
-  // const loggedInUserPosts = userPosts.filter(
-  //   ({ username }) => username === user.username
-  // );
-  console.log(suggestedUser);
-  const [isProfileEditMode,setIsProfileEditMode] = useState(false)
+   
+  
+  
 
 
   
   return (
-    <div>
-      {username === state.user.username ? (
-        <div>
-          <p>{state.user.fullname}</p>
-          <p>@{state.user.username}</p>
-          <p>{state.user.bio}</p>
-          <p><span>Followers:{state.user.followers.length}</span><span>Following:{state.user.following.length}</span></p>
-          <button>Edit</button>
-        </div>
-      ) : (
-        <div>
-          <p>{suggestedUser?.fullname}</p>
-          <p>@{username}</p>
-          <p>{suggestedUser?.bio}</p>
-          <p><span>Followers:{suggestedUser?.followers.length}</span><span>Following:{suggestedUser?.following.length}</span></p>
-          <button onClick={()=>followUsers(suggestedUser?._id)}>Follow</button>
-        </div>
-      )}
-      {userPosts.map(({ _id, content, username, createdAt, mediaUrl,firstName,lastName }) => (
-        <li key={_id}>
-          <h2>{firstName} {lastName}</h2>
-
-          <h3>@{username}</h3>
-          <span>{createdAt}</span>
+    <div className="post-container">
+     
+      <ul className="post-card">
+      
+        {username===user.username&&
+        <div className="user-profile">
+      <img className="profile-pic"src={user.profilePic}/>
+      <span>{user.fullname}</span>
+      <p className="user-bio">{user.bio}</p>
+      <button className="edit-profile-btn">Edit</button>
+      </div>}
+      {userPosts.map(({ _id, content, username, profilePic, mediaUrl,firstName,lastName }) => (
+        <li className="post-list" key={_id}>
+          <img
+                className="profile-pic"
+                src={profilePic}
+                alt="profile"
+              />
+          <span>{firstName} {lastName}</span>
+          <span>@{username}</span>
           <p>{content}</p>
           {mediaUrl && (
             <img src={mediaUrl} alt="random" height="250px" width="300px" />
           )}
         </li>
+  
       ))}
+    </ul>
+
     </div>
   );
 }

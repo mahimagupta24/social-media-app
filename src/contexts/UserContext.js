@@ -61,7 +61,7 @@ export default function UserProvider({ children }) {
       if (response.status === 200) {
         const data = await response.json();
          console.log(data);
-        // dispatch({ type: "FOLLOW_USER", payload: data });
+        //  dispatch({ type: "GET_USERS", payload: data });
          setUser((user=>({...user,following:data.user.following})))
         // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
       }

@@ -72,6 +72,33 @@ export default function FeatureProvider({ children }) {
     }
   };
 
+   const EditPost = async (postId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`/api/posts/edit/${postId}`, {
+        method: 'POST',
+        headers: { 'Authorization': token
+        },  
+        body: JSON.stringify({ newPost }),
+      });
+
+      const data = await response.json();
+
+     
+      console.log(data);
+    } catch (error) {
+      
+      console.error(error);
+    }
+  };
+
+
+   
+
+
+
+
   const getUserPosts = async (username) => {
     try {
       const response = await fetch(`/api/posts/user/${username}`);
@@ -148,6 +175,7 @@ export default function FeatureProvider({ children }) {
         addNewPost,
         newPost,
         deletePosts,
+        
       }}
     >
       {children}
