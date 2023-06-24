@@ -27,7 +27,7 @@ export default function Explorer() {
           //  );
           //  console.log(isLiked)
           //  console.log(myUsername)
-          return <li
+          return <li style={{cursor:"pointer"}}
             className="post-list"
             key={post?._id}
             onClick={() => handleUserPosts(post.username)}

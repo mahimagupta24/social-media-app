@@ -11,12 +11,12 @@ export default function Suggestions() {
 const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
 console.log(suggestedUsers)
 
-  const handleFollow = (id) => {
-    followUsers(id);
-    const updatedUsers = suggestedUsers.filter(({_id})=>_id!==id)
-    state.users = updatedUsers
-    // console.log(updatedUsers)
-  };
+   const handleFollow = (id) => {
+     followUsers(id);
+   const updatedUsers = suggestedUsers.filter(({_id})=>_id!==id)
+   state.users = updatedUsers
+    console.log(state.users)
+   };
   return (
     <div className="suggestion-container">
       <h1>Suggested users</h1>

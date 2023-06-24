@@ -13,12 +13,12 @@ export default function Profile() {
   const { state} = useContext(UserContext);
   const { userPosts} = useContext(FeatureContext);
   
-  console.log(state.users)
+  
    const suggestedUsers = state.users.filter(({ _id }) => _id !== user._id);
    console.log(suggestedUsers);
 
-   const suggestedUser = suggestedUsers.find(user=>user.username===username)
-   
+   const suggestedUser = userPosts.find(({username})=>username===username)
+   console.log(suggestedUser)
   
   
 

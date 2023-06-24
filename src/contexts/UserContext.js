@@ -26,7 +26,7 @@ export default function UserProvider({ children }) {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
    const {user, setUser} = useContext(AuthContext);
-   const{posts,setPosts} = useContext(FeatureContext)
+   
 
   const getAllUsers = async () => {
     try {
@@ -61,7 +61,7 @@ export default function UserProvider({ children }) {
       if (response.status === 200) {
         const data = await response.json();
          console.log(data);
-        //  dispatch({ type: "GET_USERS", payload: data });
+          // dispatch({ type: "GET_USERS", payload: data.users.following });
          setUser((user=>({...user,following:data.user.following})))
         // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
       }
@@ -131,6 +131,7 @@ export default function UserProvider({ children }) {
         dispatch,
         addBookmarkPosts,
         removeBookmarkPosts,
+      
         
       }}
     >
