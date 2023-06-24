@@ -7,8 +7,12 @@ import Suggestions from "../../components/suggestions";
 
 export default function Bookmark() {
   const { user } = useContext(AuthContext);
-  const { posts, getLikedPosts, getUnLikedPosts } = useContext(FeatureContext);
+  const { posts, getLikedPosts, getUnLikedPosts, } = useContext(FeatureContext);
+  const{addBookmarkPosts,removeBookmarkPosts}= useContext(UserContext)
   console.log(user);
+
+  const isBookmarked = (postId) =>
+  user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
   return (
     <div className="post-container">
@@ -49,6 +53,18 @@ export default function Bookmark() {
               )}
             </div>
             <div className="btns">
+            {isBookmarked(post._id) ? (
+                  <span
+                    style={{ color: "red" }}
+                    onClick={() => removeBookmarkPosts(post._id)}
+                  >
+                    <i className="fa fa-bookmark"></i>
+                  </span>
+                ) : (
+                  <span onClick={() => addBookmarkPosts(post._id)}>
+                    <i className="fa fa-bookmark"></i>
+                  </span>
+                )}
             {isLiked ? (
               <span
                 style={{ color: "red" }}
