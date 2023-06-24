@@ -3,13 +3,13 @@ import { UserContext } from "../contexts/UserContext";
 import { AuthContext } from "../contexts/AuthContext";
 import "./components.css"
 export default function Suggestions() {
-  const { state, followUsers,getAllUsers  } = useContext(UserContext);
+  const { state, followUsers,getAllUsers,suggestedUsers,searchedUsers  } = useContext(UserContext);
   const {user} = useContext(AuthContext)
 
   
 
-const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
-console.log(suggestedUsers)
+// const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
+// console.log(suggestedUsers)
 
    const handleFollow = (id) => {
      followUsers(id);
@@ -20,7 +20,7 @@ console.log(suggestedUsers)
   return (
     <div className="suggestion-container">
       <h1>Suggested users</h1>
-      {suggestedUsers?.map(({ _id, fullname, username ,profilePic}) => (
+      {searchedUsers?.map(({ _id, fullname, username ,profilePic}) => (
         <div className="suggestion-list"key={_id}>
           <img className="profile-pic"src={profilePic}/>
           <div className="suggested-user-details">

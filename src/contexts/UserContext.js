@@ -26,7 +26,8 @@ export default function UserProvider({ children }) {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
    const {user, setUser} = useContext(AuthContext);
-   
+   const [searchText,setSearchText]= useState("")
+
 
   const getAllUsers = async () => {
     try {
@@ -122,6 +123,11 @@ export default function UserProvider({ children }) {
     removeBookmarkPosts();
   }, []);
 
+  const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
+console.log(suggestedUsers)
+
+const searchedUsers = searchText!==""?suggestedUsers.filter(({username})=>username.toLowerCase().includes(searchText.toLocaleLowerCase())):suggestedUsers
+
   return (
     <UserContext.Provider
       value={{
@@ -131,7 +137,9 @@ export default function UserProvider({ children }) {
         dispatch,
         addBookmarkPosts,
         removeBookmarkPosts,
-      
+      searchedUsers,
+      suggestedUsers,
+      setSearchText
         
       }}
     >

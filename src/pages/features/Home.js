@@ -6,6 +6,7 @@ import Suggestions from "../../components/suggestions";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 import "./features.css";
+import Header from "../../components/Header";
 
 export default function Home() {
   const {
@@ -34,6 +35,7 @@ export default function Home() {
   //   getUnLikedPosts(postId);
   //   setShowLikedPost(true);
   // };
+  
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -90,7 +92,10 @@ export default function Home() {
     user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
   return (
+    <div>
+      <Header/>
     <div className="post-container">
+      
       <div>
         <SideBar />
       </div>
@@ -189,6 +194,7 @@ export default function Home() {
       <div>
         <Suggestions />
       </div>
+    </div>
     </div>
   );
 }
