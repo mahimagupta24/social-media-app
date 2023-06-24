@@ -2,15 +2,23 @@ import { useContext } from "react";
 import { FeatureContext } from "../../contexts/FeatureContext";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
+import Header from "../../components/Header";
+import SideBar from "../../components/sideBar";
+import Suggestions from "../../components/suggestions";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Explorer() {
   const { posts, getUserPosts, getLikedPosts, getUnLikedPosts } =
     useContext(FeatureContext);
     const{addBookmarkPosts,removeBookmarkPosts}=useContext(UserContext)
+    const{user} =useContext(AuthContext)
 
   const navigate = useNavigate();
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  const isBookmarked = (postId) =>
+    user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
   const handleUserPosts = (username) => {
     getUserPosts(username);
@@ -18,27 +26,33 @@ export default function Explorer() {
   };
   console.log(posts)
   return (
+    <div>
+        <Header/>
     <div className="post-container">
+      
+      <div>
+        <SideBar />
+      </div>
+
+     
       <ul className="post-card">
         {posts.map(( post ) => {
-          //  const myUsername = socialUser.username;
-          //  const isLiked = post?.likes?.likedBy.some(
-          //    (user) => user.username === myUsername
-          //  );
-          //  console.log(isLiked)
-          //  console.log(myUsername)
-          return <li style={{cursor:"pointer"}}
+           const myUsername = socialUser.username;
+           const isLiked = post?.likes?.likedBy.some(
+             (user) => user.username === myUsername
+           );
+          return <li 
             className="post-list"
             key={post?._id}
-            onClick={() => handleUserPosts(post.username)}
+            
           >
             <div>
-              <img
+              <img 
                 className="profile-pic"
                 src={post?.profilePic}
                 alt="profile"
               />
-              <span>
+              <span style={{cursor:"pointer"}} onClick={() => handleUserPosts(post.username)}>
                 {post?.firstName} {post?.lastName}
               </span>
               <span>@{post?.username}</span>
@@ -46,7 +60,7 @@ export default function Explorer() {
             <p>{post?.content}</p>
             <div>
               {post?.mediaUrl && (
-                <img
+                <img 
                   src={post?.mediaUrl}
                   alt="random"
                   height="250px"
@@ -55,7 +69,7 @@ export default function Explorer() {
               )}
             </div>
             <div className="btns">
-              {/* {isBookmarked(post._id) ? (
+              {isBookmarked(post._id) ? (
                 <span
                   style={{ color: "red" }}
                   onClick={() => removeBookmarkPosts(post._id)}
@@ -66,9 +80,9 @@ export default function Explorer() {
                 <span onClick={() => addBookmarkPosts(post._id)}>
                   <i className="fa fa-bookmark"></i>
                 </span>
-              )} */}
+              )}
 
-              {/* {isLiked ? (
+              {isLiked ? (
                 <span
                   style={{ color: "red" }}
                   onClick={() => getUnLikedPosts(post._id)}
@@ -81,7 +95,7 @@ export default function Explorer() {
                   <i className="fa fa-heart"></i>
                   {post.likes.likeCount}
                 </span>
-              )} */}
+              )}
               <span>
                 <i className="fa fa-comment"></i>
                 {post?.comments?.length > 0 && post?.comments?.length}
@@ -90,6 +104,10 @@ export default function Explorer() {
           </li>
 })}
       </ul>
+      <div>
+        <Suggestions/>
+      </div>
+    </div>
     </div>
   );
 }
