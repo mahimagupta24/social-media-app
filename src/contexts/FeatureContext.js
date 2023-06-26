@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router";
+import { AuthContext } from "./AuthContext";
 
 export const FeatureContext = createContext();
 
@@ -9,8 +10,9 @@ export default function FeatureProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
+  const [editingPost,setEditingPost] = useState(null)
   const [likedPosts, setLikedPosts] = useState([]);
-  
+  const { user } = useContext(AuthContext);
 
   const fetchAllPosts = async () => {
     try {
@@ -35,6 +37,9 @@ export default function FeatureProvider({ children }) {
   const addNewPost = async (postText) => {
     const postData = {
       content: postText,
+      profilePic: user.profilePic,
+      firstName: user.firstName,
+      lastName: user.lastName,
     };
     const token = localStorage.getItem("token");
     try {
@@ -47,12 +52,14 @@ export default function FeatureProvider({ children }) {
       if (response.status === 201) {
         const data = await response.json();
         console.log(data);
-        setPosts(data.posts);
+
+         setPosts(data.posts);
       }
     } catch (e) {
       console.error(e);
     }
   };
+
 
   const deletePosts = async (postId) => {
     const token = localStorage.getItem("token");
@@ -72,32 +79,22 @@ export default function FeatureProvider({ children }) {
     }
   };
 
-   const EditPost = async (postId) => {
+  const EditPost = async (postId) => {
     try {
       const token = localStorage.getItem("token");
-
       const response = await fetch(`/api/posts/edit/${postId}`, {
-        method: 'POST',
-        headers: { 'Authorization': token
-        },  
-        body: JSON.stringify({ newPost }),
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ editingPost }),
       });
 
       const data = await response.json();
 
-     
       console.log(data);
     } catch (error) {
-      
       console.error(error);
     }
   };
-
-
-   
-
-
-
 
   const getUserPosts = async (username) => {
     try {
@@ -175,7 +172,7 @@ export default function FeatureProvider({ children }) {
         addNewPost,
         newPost,
         deletePosts,
-        
+        editingPost,setEditingPost,EditPost
       }}
     >
       {children}

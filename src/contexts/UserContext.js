@@ -9,9 +9,18 @@ export const UserContext = createContext();
 const userReducer = (state, action) => {
   switch (action.type) {
     case "GET_USERS":
+      console.log("Get user action!");
       return { ...state, users: action.payload };
-   case"ADD_BOOKMARK_POSTS":
-   return {...state,bookmarks:action.payload}
+    case "ADD_BOOKMARK_POSTS":
+      return { ...state, bookmarks: action.payload };
+    case "FOLLOW_USER":
+      // console.log("follow user action!");
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user._id === action.payload._id ? action.payload : user
+        ),
+      };
     default:
       return state;
   }
@@ -20,37 +29,33 @@ const userReducer = (state, action) => {
 export default function UserProvider({ children }) {
   const initialState = {
     users: [],
-    bookmarks:[]
-   
+    bookmarks: [],
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-   const {user, setUser} = useContext(AuthContext);
-   const [searchText,setSearchText]= useState("")
-
+  const { user, setUser } = useContext(AuthContext);
+  const [searchText, setSearchText] = useState("");
 
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users", {
         method: "GET",
       });
-      // console.log(response);
+
       if (response.status === 200) {
         const data = await response.json();
         dispatch({ type: "GET_USERS", payload: data.users });
-        // console.log(data.users);
-
-        
       }
     } catch (e) {
       console.error(e);
     }
   };
+
   useEffect(() => {
     getAllUsers();
   }, []);
 
-  const followUsers = async (followId) => {
+  const handleFollow = async (followId) => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(`/api/users/follow/${followId}`, {
@@ -58,23 +63,22 @@ export default function UserProvider({ children }) {
         headers: { authorization: `bearer${token}` },
         body: JSON.stringify({}),
       });
-      // console.log(response)
+
       if (response.status === 200) {
         const data = await response.json();
-         console.log(data);
-          // dispatch({ type: "GET_USERS", payload: data.users.following });
-         setUser((user=>({...user,following:data.user.following})))
-        // setSuggestedUsers(suggestedUsers.filter(({ _id }) => _id !== followId));
+
+        // setUser(data.user);
+        const followedUser = data.followUser;
+
+        dispatch({ type: "FOLLOW_USER", payload: followedUser });
+
+        setUser((user) => ({ ...user, following: data.user.following }));
       }
     } catch (e) {
       console.error(e);
     }
   };
-  useEffect(() => {
-    followUsers();
-  }, []);
 
-  
   const addBookmarkPosts = async (postId) => {
     const token = localStorage.getItem("token");
     try {
@@ -83,21 +87,15 @@ export default function UserProvider({ children }) {
         headers: { authorization: token },
         body: JSON.stringify({}),
       });
-      console.log(response);
+
       const data = await response.json();
-      console.log(data);
-       dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
-      setUser(user=>({...user,bookmarks:data.bookmarks}))
-       
-     
+
+      dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
+      setUser((user) => ({ ...user, bookmarks: data.bookmarks }));
     } catch (e) {
       console.error(e);
     }
   };
-
-  useEffect(() => {
-    addBookmarkPosts();
-  }, []);
 
   const removeBookmarkPosts = async (postId) => {
     const token = localStorage.getItem("token");
@@ -107,40 +105,27 @@ export default function UserProvider({ children }) {
         headers: { authorization: token },
         body: JSON.stringify({}),
       });
-      console.log(response)
+
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
+
         // dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload:data.bookmarks});
-        setUser(user=>({...user,bookmarks:data.bookmarks}))
-       }
+        setUser((user) => ({ ...user, bookmarks: data.bookmarks }));
+      }
     } catch (e) {
       console.error(e);
     }
   };
 
-  useEffect(() => {
-    removeBookmarkPosts();
-  }, []);
-
-  const suggestedUsers = state?.users?.filter(({_id})=>_id!==user._id)
-console.log(suggestedUsers)
-
-const searchedUsers = searchText!==""?suggestedUsers.filter(({username})=>username.toLowerCase().includes(searchText.toLocaleLowerCase())):suggestedUsers
-
   return (
     <UserContext.Provider
       value={{
-        getAllUsers,
-        followUsers,
         state,
-        dispatch,
         addBookmarkPosts,
         removeBookmarkPosts,
-      searchedUsers,
-      suggestedUsers,
-      setSearchText
-        
+        // searchedUsers,
+        setSearchText,
+        handleFollow,
       }}
     >
       {children}

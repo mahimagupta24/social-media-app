@@ -32,7 +32,7 @@ export const posts = [
     lastName: "Balika",
     username: "adarshbalika",
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
-    createdAt: "march 12, 2023",
+    createdAt: "June 22, 2023",
     updatedAt: formatDate(),
   },
 
@@ -51,7 +51,8 @@ export const posts = [
     lastName: "Soni",
     username: "shubhamsoni",
     profilePic:"https://wallpapercave.com/wp/wp2058252.jpg",
-    createdAt: "2023-02-25T10:30:33+05:30",
+    // createdAt: "2023-02-25T10:30:33+05:30",
+    createdAt:"February 25, 2023",
     updatedAt: formatDate(),
   },
 
@@ -81,7 +82,8 @@ export const posts = [
     lastName: "Gupta",
     username: "raimagupta",
     profilePic:"https://4.bp.blogspot.com/-LQKY1YlzhOc/Th56wgEJiBI/AAAAAAAAETw/2ZcwvyZvR1U/s1600/most-beautiful-little-girl-in-the-world.JPG",
-    createdAt: "2023-03-28T21:00:15+05:30",
+    // createdAt: "2023-03-28T21:00:15+05:30",
+    createdAt:"March 28, 2023",
     updatedAt: formatDate(),
   },
   
@@ -109,7 +111,8 @@ export const posts = [
     lastName: "Balika",
     username: "adarshbalika",
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
-    createdAt: "2023-04-03T09:00:10+05:30",
+    // createdAt: "2023-06-13T09:00:10+05:30",
+    createdAt:"June 13, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -136,7 +139,8 @@ export const posts = [
     lastName: "Gupta",
     username: "mahimagupta",
     profilePic:"https://w0.peakpx.com/wallpaper/417/640/HD-wallpaper-cute-adorable-girl-baby-is-looking-up-wearing-purple-dress-cute.jpg",
-    createdAt: "2023-02-24T22:30:10+05:30",
+    // createdAt: "2023-02-24T22:30:10+05:30",
+    createdAt:"February 24, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -153,7 +157,8 @@ export const posts = [
     lastName: "Doe",
     username: "johndoe",
     profilePic:"https://wallpapercave.com/wp/wp2525371.jpg",
-    createdAt: "2023-04-21T23:00:14+05:30",
+    // createdAt: "2023-04-21T23:00:14+05:30",
+    createdAt:"April 21, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -180,7 +185,8 @@ export const posts = [
     lastName: "Doe",
     username: "johndoe",
     profilePic:"https://wallpapercave.com/wp/wp2525371.jpg",
-    createdAt: "2023-03-17T10:45:00+05:30",
+    // createdAt: "2023-03-17T10:45:00+05:30",
+    createdAt:"March 17, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -208,7 +214,9 @@ export const posts = [
     lastName: "Balika",
     username: "adarshbalika",
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
-    createdAt: "2023-03-05T18:45:00+05:30",
+    
+     createdAt:"May 05, 2023",
+    // createdAt: "2023-05-05T18:45:00+05:30",
     updatedAt: formatDate(),
   },
   {
@@ -225,7 +233,8 @@ export const posts = [
     lastName: "Soni",
     username: "shubhamsoni",
     profilePic:"https://wallpapercave.com/wp/wp2058252.jpg",
-    createdAt: "2023-04-08T17:05:04+05:30",
+    // createdAt: "2023-04-08T17:05:04+05:30",
+    createdAt:"April 08, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -242,7 +251,8 @@ export const posts = [
     lastName: "Balika",
     username: "adarshbalika",
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
-    createdAt: "2023-02-10T07:15:10+05:30",
+    // createdAt: "2023-06-10T07:15:10+05:30",
+    createdAt:"June 10, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -260,7 +270,8 @@ export const posts = [
     lastName: "Gupta",
     username: "raimagupta",
     profilePic:"https://4.bp.blogspot.com/-LQKY1YlzhOc/Th56wgEJiBI/AAAAAAAAETw/2ZcwvyZvR1U/s1600/most-beautiful-little-girl-in-the-world.JPG",
-    createdAt: "2023-03-11T09:30:18+05:30",
+    createdAt:"March 11, 2023",
+    // createdAt: "2023-03-11T09:30:18+05:30",
     updatedAt: formatDate(),
   },
   {
@@ -279,7 +290,8 @@ export const posts = [
     lastName: "Soni",
     username: "shubhamsoni",
     profilePic:"https://wallpapercave.com/wp/wp2058252.jpg",
-    createdAt: "2023-03-15T09:45:13+05:30",
+    // createdAt: "2023-03-15T09:45:13+05:30",
+    createdAt:"March 15, 2023",
     updatedAt: formatDate(),
   },
   {
@@ -298,7 +310,8 @@ export const posts = [
     lastName: "Gupta",
     username: "mahimagupta",
     profilePic:"https://w0.peakpx.com/wallpaper/417/640/HD-wallpaper-cute-adorable-girl-baby-is-looking-up-wearing-purple-dress-cute.jpg",
-    createdAt: "2023-05-16T19:00:13+05:30",
+    createdAt:"May 02, 2023",
+    // createdAt: "2023-05-16T19:00:13+05:30",
     updatedAt: formatDate(),
   },
 ];

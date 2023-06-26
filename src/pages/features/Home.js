@@ -19,34 +19,31 @@ export default function Home() {
     getUnLikedPosts,
     newPost,
     deletePosts,
-
+    editingPost,
+    setEditingPost,
+    EditPost,
   } = useContext(FeatureContext);
 
   const { addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
 
   const { user } = useContext(AuthContext);
-  const[sortOrder,setSortOrder]=useState(null)
-  // const handleLikePost = (postId) => {
-  //   getLikedPosts(postId);
-  // };
-
-  // const handleUnlikePost = (postId) => {
-  //   getUnLikedPosts(postId);
-  //   setShowLikedPost(true);
-  // };
-  
+  const [showEditingData, setShowEditingData] = useState(false);
+  const [editContent, setEditContent] = useState();
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  console.log(posts);
-  console.log(user)
-
   useEffect(() => {
     getUserPosts(socialUser.username);
+    handleSortedPost();
   }, [socialUser.username]);
 
-  
+  // const handleEdit = (id) => {
+  //   setEditContent(id);
+  //   setShowEditingData(true);
+  //   console.log("1", id);
+
+  // };
 
   const loggedInUserPosts = posts?.filter(
     (post) => post?.username === socialUser?.username
@@ -56,27 +53,20 @@ export default function Home() {
     user?.following?.some((el) => el.username === post.username)
   );
 
-  
-
-  const allPosts = [ ...followingPosts,...loggedInUserPosts];
-  console.log(allPosts);
-
-  const sortLikedPosts =()=>{
-    const sortedPosts =
-   [...posts].sort(
-      (a, b) => b.likes.likeCount - a.likes.likeCount)
-      setPosts(sortedPosts)
-   }
+  const allPosts = [...loggedInUserPosts, ...followingPosts];
 
   const handleSortedPost = () => {
-    if (!sortOrder) {
-      const sortedPosts = [...posts].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      setPosts(sortedPosts);
-    } else {
-      setPosts([...posts]);
-    }
+    const sortedPosts = [...posts].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    setPosts(sortedPosts);
+  };
+
+  const sortLikedPosts = () => {
+    const sortedPosts = [...posts].sort(
+      (a, b) => b.likes.likeCount - a.likes.likeCount
+    );
+    setPosts(sortedPosts);
   };
 
   const handlePostSubmit = () => {
@@ -93,108 +83,134 @@ export default function Home() {
 
   return (
     <div>
-      <Header/>
-    <div className="post-container">
-      
-      <div>
-        <SideBar />
-      </div>
+      <Header />
+      <div className="post-container">
+        <div>
+          <SideBar />
+        </div>
 
-     
-      <ul className="post-card">
-        <div className="add-post-container">
-          <input className="added-post-card" placeholder="What is happening"onChange={handlePostChange} value={newPost} />
+        <ul className="post-card">
+          <div className="add-post-container">
+            <input
+              className="added-post-card"
+              placeholder="What is happening"
+              onChange={handlePostChange}
+              value={newPost}
+            />
           </div>
           <div>
-          <button id="post-btn"onClick={handlePostSubmit}>Post</button>
+            <button id="post-btn" onClick={handlePostSubmit}>
+              Post
+            </button>
           </div>
-       
-      
+
           <div className="sort-btns">
-          <button id="sort-btn"onClick={handleSortedPost}>Latest Post</button>
-          <button id="trending-btn"onClick={sortLikedPosts}>Trending</button>
+            <button id="sort-btn" onClick={handleSortedPost}>
+              Latest Post
+            </button>
+            <button id="trending-btn" onClick={sortLikedPosts}>
+              Trending
+            </button>
           </div>
-        {allPosts.map((post) => {
-          const myUsername = socialUser?.username;
-          const isLiked = post?.likes?.likedBy.some(
-            (user) => user.username === myUsername
-          );
-          const isOwner = post?.username === socialUser?.username;
+          {allPosts.map((post) => {
+            const myUsername = socialUser?.username;
+            const isLiked = post?.likes?.likedBy.some(
+              (user) => user.username === myUsername
+            );
+            const isOwner = post?.username === socialUser?.username;
 
-          return (
-            <li className="post-list" key={post._id}>
-              <div>
-                <img className="profile-pic" src={post.profilePic}alt="profile" />
-                <span>
-                  <b>
-                    {post.firstName} {post.lastName}
-                  </b>
-                </span>
-                <span>@{post.username}</span>
-              </div>
-              <p>{post.content}</p>
-              <div>
-                {post.mediaUrl && (
+            return (
+              <li className="post-list" key={post._id}>
+                <div>
                   <img
-                    src={post.mediaUrl}
-                    alt="random"
-                    height="250px"
-                    width="300px"
-                    borderradius="2rem"
+                    className="profile-pic"
+                    src={post.profilePic}
+                    alt="profile"
                   />
-                )}
-              </div>
-              <div className="btns">
-               
-                {isBookmarked(post._id) ? (
-                  <span
-                    style={{ color: "red" }}
-                    onClick={() => removeBookmarkPosts(post._id)}
-                  >
-                    <i className="fa fa-bookmark"></i>
+                  <span>
+                    <b>
+                      {post.firstName} {post.lastName}
+                    </b>
                   </span>
-                ) : (
-                  <span onClick={() => addBookmarkPosts(post._id)}>
-                    <i className="fa fa-bookmark"></i>
-                  </span>
-                )}
+                  <span>@{post.username}</span>
+                  <span>{post.createdAt}</span>
+                </div>
+                <p>{post.content}</p>
+                <div>
+                  {post.mediaUrl && (
+                    <img
+                      src={post.mediaUrl}
+                      alt="random"
+                      height="250px"
+                      width="300px"
+                      borderradius="2rem"
+                    />
+                  )}
+                </div>
+                <div className="btns">
+                  {isBookmarked(post._id) ? (
+                    <span
+                      style={{ color: "red" }}
+                      onClick={() => removeBookmarkPosts(post._id)}
+                    >
+                      <i className="fa fa-bookmark"></i>
+                    </span>
+                  ) : (
+                    <span onClick={() => addBookmarkPosts(post._id)}>
+                      <i className="fa fa-bookmark"></i>
+                    </span>
+                  )}
 
-                {isLiked ? (
-                  <span
-                    style={{ color: "red" }}
-                    onClick={() => getUnLikedPosts(post._id)}
-                  >
-                    <i className="fa fa-heart"></i>
-                    {post.likes.likeCount}
+                  {isLiked ? (
+                    <span
+                      style={{ color: "red" }}
+                      onClick={() => getUnLikedPosts(post._id)}
+                    >
+                      <i className="fa fa-heart"></i>
+                      {post.likes.likeCount}
+                    </span>
+                  ) : (
+                    <span onClick={() => getLikedPosts(post._id)}>
+                      <i className="fa fa-heart"></i>
+                      {post.likes.likeCount}
+                    </span>
+                  )}
+                  <span>
+                    <i className="fa fa-comment"></i>
+                    {post.comments?.length > 0 && post.comments?.length}
                   </span>
-                ) : (
-                  <span onClick={() => getLikedPosts(post._id)}>
-                    <i className="fa fa-heart"></i>
-                    {post.likes.likeCount}
-                  </span>
-                )}
-                <span>
-                  <i className="fa fa-comment"></i>
-                  {post.comments?.length > 0 && post.comments?.length}
-                </span>
-                {isOwner && (
-                  <div>
-                  <button>Edit</button>
-                  <span onClick={() => deletePosts(post._id)}>
-                    <i className="fa fa-trash"></i>
-                  </span>
-                  </div>
-                )}
-              </div>
-             
-            </li>
-          );
-        })}
-      </ul>
-      <div>
-        <Suggestions />
+                  {isOwner && (
+                    <div>
+                      <button
+                        onClick={() => {
+                          setEditContent(post.content);
+                          setShowEditingData(true);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      {showEditingData && editContent === post.content && (
+                        <div>
+                          <input value={post.content}/>
+                          <button onClick={() => EditPost(post._id)}>
+                            Save
+                          </button>
+                        </div>
+                      )}
+                      <span onClick={() => deletePosts(post._id)}>
+                        <i className="fa fa-trash"></i>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <div>
+          <Suggestions />
+        </div>
       </div>
-    </div>
     </div>
   );
 }
