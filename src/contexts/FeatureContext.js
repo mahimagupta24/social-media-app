@@ -79,16 +79,20 @@ export default function FeatureProvider({ children }) {
     }
   };
 
-  const EditPost = async (postId) => {
+  const EditPost = async (postId,editText) => {
+    const creds={
+      content:editText
+    }
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`/api/posts/edit/${postId}`, {
         method: "POST",
         headers: { authorization: token },
-        body: JSON.stringify({ editingPost }),
+        body: JSON.stringify({ creds }),
       });
 
       const data = await response.json();
+      setPosts(data.posts)
 
       console.log(data);
     } catch (error) {
