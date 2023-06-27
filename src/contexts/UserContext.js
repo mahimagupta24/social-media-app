@@ -35,6 +35,7 @@ export default function UserProvider({ children }) {
 
   const { user, setUser } = useContext(AuthContext);
   const [searchText, setSearchText] = useState("");
+  const { setUserPosts,setPosts } = useContext(FeatureContext);
 
   const getAllUsers = async () => {
     try {
@@ -117,15 +118,68 @@ export default function UserProvider({ children }) {
     }
   };
 
+  const editUserInfo = async (data) => {
+    const token = localStorage.getItem("token");
+    const userData = {
+      bio: data.bio,
+      profilePic: data.profilePic,
+      website: data.website,
+    };
+    try {
+      const response = await fetch("/api/users/edit", {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ userData }),
+      });
+
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data.user);
+        setUser(data.user);
+        setUserPosts((posts) =>
+          posts.map((post) =>
+            post.username === data.user.username
+              ? { ...post, profilePic: data.user.profilePic }
+              : post
+          )  
+        );
+        setPosts((posts) =>
+          posts.map((post) =>
+            post.username === data.user.username
+              ? { ...post, profilePic: data.user.profilePic }
+              : post
+          )  
+        );
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const allUsers = state.users;
+  const myFollowing = user?.following;
+const suggestedUsers = allUsers
+  .filter(({ _id }) => _id !== user?._id)
+  .filter(
+    (user) =>
+      !myFollowing?.some((followedUser) => followedUser._id === user._id)
+  );
+
+  // suggestedUsers =searchText!=="" ?suggestedUsers.filter(({username})=>username.includes(searchText)):suggestedUsers
+
   return (
     <UserContext.Provider
       value={{
         state,
         addBookmarkPosts,
         removeBookmarkPosts,
+        searchText,
         // searchedUsers,
         setSearchText,
         handleFollow,
+        editUserInfo,
+        suggestedUsers
+        
       }}
     >
       {children}
