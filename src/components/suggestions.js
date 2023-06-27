@@ -3,20 +3,20 @@ import { UserContext } from "../contexts/UserContext";
 import { AuthContext } from "../contexts/AuthContext";
 import "./components.css";
 export default function Suggestions() {
-  const { state, handleFollow } = useContext(UserContext);
+  const { state, handleFollow,suggestedUsers } = useContext(UserContext);
   const { user: loggedInUser } = useContext(AuthContext);
 
  
 
-  const allUsers = state.users;
-  const myFollowing = loggedInUser.following;
+  // const allUsers = state.users;
+  // const myFollowing = loggedInUser.following;
 
-  const suggestedUsers = allUsers
-    .filter(({ _id }) => _id !== loggedInUser._id)
-    .filter(
-      (user) =>
-        !myFollowing.some((followedUser) => followedUser._id === user._id)
-    );
+  // const suggestedUsers = allUsers
+  //   .filter(({ _id }) => _id !== loggedInUser._id)
+  //   .filter(
+  //     (user) =>
+  //       !myFollowing.some((followedUser) => followedUser._id === user._id)
+  //   );
 
   return (
     <div className="suggestion-container">

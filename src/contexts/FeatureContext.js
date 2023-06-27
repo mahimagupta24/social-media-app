@@ -79,16 +79,17 @@ export default function FeatureProvider({ children }) {
     }
   };
 
-  const EditPost = async (postId,editText) => {
-    const creds={
-      content:editText
+  const EditPost = async (postId,editText,editPic) => {
+    const postData={
+      content:editText,
+      mediaUrl:editPic
     }
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`/api/posts/edit/${postId}`, {
         method: "POST",
         headers: { authorization: token },
-        body: JSON.stringify({ creds }),
+        body: JSON.stringify({ postData }),
       });
 
       const data = await response.json();
@@ -106,16 +107,17 @@ export default function FeatureProvider({ children }) {
       // console.log(response);
       if (response.status === 200) {
         const data = await response.json();
-        setUserPosts(data.posts);
-        // console.log(data.posts);
+         setUserPosts(data.posts)
+        //  setPosts(data.posts);
+        console.log(data.posts);
       }
     } catch (e) {
       console.error(e);
     }
   };
-  useEffect(() => {
-    getUserPosts();
-  }, []);
+  // useEffect(() => {
+  //   getUserPosts();
+  // }, []);
 
   const getLikedPosts = async (postId) => {
     const token = localStorage.getItem("token");
@@ -136,10 +138,7 @@ export default function FeatureProvider({ children }) {
       console.error(e);
     }
   };
-  useEffect(() => {
-    getLikedPosts();
-  }, []);
-
+ 
   const getUnLikedPosts = async (postId) => {
     const token = localStorage.getItem("token");
     try {
@@ -158,9 +157,9 @@ export default function FeatureProvider({ children }) {
       console.error(e);
     }
   };
-  useEffect(() => {
-    getUnLikedPosts();
-  }, []);
+  // useEffect(() => {
+  //   getUnLikedPosts();
+  // }, []);
 
   return (
     <FeatureContext.Provider
@@ -168,6 +167,7 @@ export default function FeatureProvider({ children }) {
         posts,
         setPosts,
         userPosts,
+        setUserPosts,
         getUserPosts,
         setNewPost,
         getLikedPosts,

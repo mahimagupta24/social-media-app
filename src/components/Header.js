@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Header() {
-const{setSearchText}=useContext(UserContext)
+const{suggestedUsers,setSearchText,searchText}=useContext(UserContext)
+const {user} = useContext(AuthContext)
 
+const filteredUsers =  suggestedUsers.filter(({username})=>username?.toLowerCase().includes(searchText?.toLowerCase()))
+console.log(filteredUsers)
   return (
     <div>   
     <div className="header">

@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 import "./features.css";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router";
 
 export default function Home() {
   const {
@@ -23,6 +24,7 @@ export default function Home() {
     setEditingPost,
     EditPost,
   } = useContext(FeatureContext);
+  const navigate = useNavigate()
 
   const { addBookmarkPosts, removeBookmarkPosts, state } =
     useContext(UserContext);
@@ -30,13 +32,15 @@ export default function Home() {
   const { user } = useContext(AuthContext);
   const [showEditingData, setShowEditingData] = useState(false);
   const [editContent, setEditContent] = useState();
+  const[editId,setEditId] = useState()
+  const[selectedPic,setSelectedPic]= useState()
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  useEffect(() => {
-    getUserPosts(socialUser.username);
-    handleSortedPost();
-  }, [socialUser.username]);
+  // useEffect(() => {
+  //   getUserPosts(socialUser.username);
+  //   handleSortedPost();
+  // }, [socialUser.username]);
 
   // const handleEdit = (id) => {
   //   setEditContent(id);
@@ -81,6 +85,15 @@ export default function Home() {
   const isBookmarked = (postId) =>
     user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
+    const handleUserPosts = (username) => {
+       getUserPosts(username);
+      navigate(`/profile/${username}`);
+    };
+
+     const handleEditPost = (id,content,mediaUrl)=>{
+    EditPost(id,content,mediaUrl)
+     setShowEditingData(false)
+     }
   return (
     <div>
       <Header />
@@ -132,7 +145,7 @@ export default function Home() {
                       {post.firstName} {post.lastName}
                     </b>
                   </span>
-                  <span>@{post.username}</span>
+                  <span onClick={()=>handleUserPosts(post.username)}>@{post.username}</span>
                   <span>{post.createdAt}</span>
                 </div>
                 <p>{post.content}</p>
@@ -184,19 +197,25 @@ export default function Home() {
                       <button
                         onClick={() => {
                           setEditContent(post.content);
-                          setShowEditingData(true);
+                           setShowEditingData(true);
+                          setEditId(post._id)
                         }}
                       >
                         Edit
                       </button>
-                      {showEditingData && editContent === post.content && (
+                      {showEditingData&&editId===post._id &&  (
                         <div>
-                          <input value={post.content}/>
-                          <button onClick={() => EditPost(post._id)}>
+                          <input value={editContent}onChange={
+                            (e)=>setEditContent(e.target.value)
+                            }/>
+                            <input type="file"accept="image/*"onChange={(e)=>setSelectedPic(e.target.files[0])}/>
+                          <button onClick={() => handleEditPost(post._id,editContent,selectedPic)}>
                             Save
                           </button>
+                          <button onClick={()=>setShowEditingData(false)}>Cancel</button>
                         </div>
                       )}
+                      
                       <span onClick={() => deletePosts(post._id)}>
                         <i className="fa fa-trash"></i>
                       </span>

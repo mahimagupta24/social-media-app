@@ -14,6 +14,7 @@ export const users = [
     profilePic:"https://i.pinimg.com/550x/41/01/1a/41011a92dfc518841f1ea4439eff4f21.jpg",
     bio: "Social Media Influencer",
     bookmarks:[],
+    website:"https://mahima24-portfolio.netlify.app/",
     // createdAt: "2022-03-16T10:45:00+05:30",
     updatedAt: formatDate(),
     createdAt:formatDate(),
