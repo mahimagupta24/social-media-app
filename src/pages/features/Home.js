@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { FeatureContext } from "../../contexts/FeatureContext";
 import SideBar from "../../components/sideBar";
 import Suggestions from "../../components/suggestions";
@@ -13,20 +13,18 @@ export default function Home() {
   const {
     posts,
     setPosts,
-    getUserPosts,
     setNewPost,
     addNewPost,
     getLikedPosts,
     getUnLikedPosts,
     newPost,
     deletePosts,
-    editingPost,
-    setEditingPost,
     EditPost,
+    // getUserPosts
   } = useContext(FeatureContext);
   const navigate = useNavigate()
 
-  const { addBookmarkPosts, removeBookmarkPosts, state } =
+  const { addBookmarkPosts, removeBookmarkPosts} =
     useContext(UserContext);
 
   const { user } = useContext(AuthContext);
@@ -59,6 +57,7 @@ export default function Home() {
 
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
+  console.log(allPosts)
   const handleSortedPost = () => {
     const sortedPosts = [...posts].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -86,7 +85,7 @@ export default function Home() {
     user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
     const handleUserPosts = (username) => {
-       getUserPosts(username);
+        // getUserPosts(username);
       navigate(`/profile/${username}`);
     };
 

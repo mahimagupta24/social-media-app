@@ -12,10 +12,12 @@ export default function Profile() {
 
   const { handleFollow, state } = useContext(UserContext);
 
-  const { userPosts } = useContext(FeatureContext);
+  const { posts ,userPosts} = useContext(FeatureContext);
 
-   console.log(userPosts)
-  // console.log(user.profilePic)
+   
+   const loggedInUserPosts= posts.filter((post)=>post.username===username)
+  //  console.log(user.profilePic)
+  // console.log(loggedInUserPosts)
 
   const [showProfileDetails, setShowProfileDetails] = useState(false);
 
@@ -43,7 +45,7 @@ export default function Profile() {
               {user?.website}
             </a>
             <p>
-              <span>Post:{userPosts.length}</span>
+              {/* <span>Post:{userPosts.length}</span> */}
               <span>Followers:{user?.followers.length}</span>{" "}
               <span>Following:{user?.following.length}</span>
             </p>
@@ -63,7 +65,7 @@ export default function Profile() {
             <span>{userProfile?.fullname}</span>
             <p className="user-bio">{userProfile?.bio}</p>
             <p>
-            <span>Post:{userPosts.length}</span>
+            {/* <span>Post:{.length}</span> */}
               <span>Followers:{userProfile?.followers.length}</span>{" "}
               <span>Following:{userProfile?.following.length}</span>
             </p>
@@ -76,7 +78,7 @@ export default function Profile() {
           </div>
         )}
 
-        {userPosts.map(
+        {loggedInUserPosts.map(
           ({
             _id,
             content,

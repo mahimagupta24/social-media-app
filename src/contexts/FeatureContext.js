@@ -107,9 +107,9 @@ export default function FeatureProvider({ children }) {
       // console.log(response);
       if (response.status === 200) {
         const data = await response.json();
-         setUserPosts(data.posts)
-        //  setPosts(data.posts);
-        console.log(data.posts);
+        setUserPosts(data.posts)
+         setPosts(data.posts);
+        console.log(data);
       }
     } catch (e) {
       console.error(e);

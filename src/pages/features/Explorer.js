@@ -21,7 +21,7 @@ export default function Explorer() {
     user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
   const handleUserPosts = (username) => {
-    getUserPosts(username);
+    //  getUserPosts(username);
     navigate(`/profile/${username}`);
   };
   console.log(posts)
