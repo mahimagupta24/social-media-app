@@ -62,14 +62,16 @@ export default function ProfileDetailsCard({ setShowProfileDetails }) {
       />
 </div>
 <div className="profileDetails">
-  <label><b>Bio</b></label>
+  <div>
+  <label><b>Bio</b></label>{" "}
       <input className="profileInput"
         value={profileDetails.bio}
         onChange={(e) =>
           setProfileDetails({ ...profileDetails, bio: e.target.value })
         }
       />
-      <label><b>Link</b></label>
+      </div>
+      <label><b>Link</b></label>{" "}
       <input className="profileInput"
         value={profileDetails.website}
         onChange={(e) =>
@@ -77,8 +79,10 @@ export default function ProfileDetailsCard({ setShowProfileDetails }) {
         }
       />
       </div>
-      <button onClick={handleSaveProfile}>Save</button>
-      <button onClick={handleCancel}>Cancel</button>
+      <div className="save-cancel-btn">
+      <button className="save-btn"onClick={handleSaveProfile}>Save</button>
+      <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+    </div>
     </div>
 
   );

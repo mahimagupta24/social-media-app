@@ -85,7 +85,7 @@ export default function Profile() {
               </div>
             </div>
           ) : (
-            <div className="user-profile">
+            <div className="profile">
               <img className="profile-pic" src={userProfile?.profilePic} />
               <span>{userProfile?.fullname}</span>
               <p className="user-bio">{userProfile?.bio}</p>
