@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import {  useState } from "react";
+import { useState } from "react";
 import { FeatureContext } from "../../contexts/FeatureContext";
 import SideBar from "../../components/sideBar";
 import Suggestions from "../../components/suggestions";
@@ -22,16 +22,15 @@ export default function Home() {
     EditPost,
     // getUserPosts
   } = useContext(FeatureContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { addBookmarkPosts, removeBookmarkPosts} =
-    useContext(UserContext);
+  const { addBookmarkPosts, removeBookmarkPosts } = useContext(UserContext);
 
   const { user } = useContext(AuthContext);
   const [showEditingData, setShowEditingData] = useState(false);
   const [editContent, setEditContent] = useState();
-  const[editId,setEditId] = useState()
-  const[selectedPic,setSelectedPic]= useState()
+  const [editId, setEditId] = useState();
+  const [selectedPic, setSelectedPic] = useState();
 
   const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -57,7 +56,7 @@ export default function Home() {
 
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
-  console.log(allPosts)
+  console.log(allPosts);
   const handleSortedPost = () => {
     const sortedPosts = [...posts].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -84,15 +83,15 @@ export default function Home() {
   const isBookmarked = (postId) =>
     user?.bookmarks?.find((bookmark) => bookmark._id === postId);
 
-    const handleUserPosts = (username) => {
-        // getUserPosts(username);
-      navigate(`/profile/${username}`);
-    };
+  const handleUserPosts = (username) => {
+    // getUserPosts(username);
+    navigate(`/profile/${username}`);
+  };
 
-     const handleEditPost = (id,content,mediaUrl)=>{
-    EditPost(id,content,mediaUrl)
-     setShowEditingData(false)
-     }
+  const handleEditPost = (id, content, mediaUrl) => {
+    EditPost(id, content, mediaUrl);
+    setShowEditingData(false);
+  };
   return (
     <div>
       <Header />
@@ -124,6 +123,7 @@ export default function Home() {
               Trending
             </button>
           </div>
+
           {allPosts.map((post) => {
             const myUsername = socialUser?.username;
             const isLiked = post?.likes?.likedBy.some(
@@ -132,20 +132,25 @@ export default function Home() {
             const isOwner = post?.username === socialUser?.username;
 
             return (
-              <li className="post-list" key={post._id}>
+              <li className={`post-list ${post.mediaUrl ? "with-media" : "without-media"}`} key={post._id}>
                 <div>
-                  <img
-                    className="profile-pic"
-                    src={post.profilePic}
-                    alt="profile"
-                  />
-                  <span>
-                    <b>
-                      {post.firstName} {post.lastName}
-                    </b>
-                  </span>
-                  <span onClick={()=>handleUserPosts(post.username)}>@{post.username}</span>
-                  <span>{post.createdAt}</span>
+                  <div className="profile-info">
+                    <img
+                      className="profile-pic"
+                      src={post.profilePic}
+                      alt="profile"
+                    />
+
+                    <span>
+                      <b>
+                        {post.firstName} {post.lastName}
+                      </b>
+                    </span>
+                    <span onClick={() => handleUserPosts(post.username)}>
+                      @{post.username}
+                    </span>
+                    <span>{post.createdAt}</span>
+                  </div>
                 </div>
                 <p>{post.content}</p>
                 <div>
@@ -159,6 +164,7 @@ export default function Home() {
                     />
                   )}
                 </div>
+                <hr />
                 <div className="btns">
                   {isBookmarked(post._id) ? (
                     <span
@@ -191,33 +197,60 @@ export default function Home() {
                     <i className="fa fa-comment"></i>
                     {post.comments?.length > 0 && post.comments?.length}
                   </span>
+                  
                   {isOwner && (
-                    <div>
-                      <button
-                        onClick={() => {
-                          setEditContent(post.content);
-                           setShowEditingData(true);
-                          setEditId(post._id)
-                        }}
-                      >
-                        Edit
-                      </button>
-                      {showEditingData&&editId===post._id &&  (
-                        <div>
-                          <input value={editContent}onChange={
-                            (e)=>setEditContent(e.target.value)
-                            }/>
-                            <input type="file"accept="image/*"onChange={(e)=>setSelectedPic(e.target.files[0])}/>
-                          <button onClick={() => handleEditPost(post._id,editContent,selectedPic)}>
-                            Save
-                          </button>
-                          <button onClick={()=>setShowEditingData(false)}>Cancel</button>
-                        </div>
-                      )}
-                      
-                      <span onClick={() => deletePosts(post._id)}>
+                    <div className="edit-delete">
+                       <span onClick={() => deletePosts(post._id)}>
                         <i className="fa fa-trash"></i>
                       </span>
+                      <span
+                        onClick={() => {
+                          setEditContent(post.content);
+                          setShowEditingData(true);
+                          setEditId(post._id);
+                        }}
+                      >
+                        <i className="fa fa-edit"></i>
+                      </span>
+                      {showEditingData && editId === post._id && (
+                        <div className="addPost-mainDiv">
+                          <div className="post-input-main">
+                          <div className="post-input">
+                            <input id="input-text"
+                              value={editContent}
+                              onChange={(e) => setEditContent(e.target.value)}
+                            />
+                          </div>
+                          <div className="post-input">
+                            <label for="file-upload">
+                            <input id="file-upload"
+                              type="file"
+                              accept="image/*"
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                const imgUrl = URL.createObjectURL(file);
+                                setSelectedPic(imgUrl);
+                              }}
+                            />
+                            <span id= "file-label"><i class="fa fa-camera"></i></span>
+                            </label>
+                          </div>
+                          <div className="save-cancel">
+                          <button
+                            onClick={() =>
+                              handleEditPost(post._id, editContent, selectedPic)
+                            }
+                          >
+                            Save
+                          </button>
+                          <button className="cancel-btn"onClick={() => setShowEditingData(false)}>
+                            Cancel
+                          </button>
+                          </div>
+                        </div>
+                         </div>
+                      )}
+                     
                     </div>
                   )}
                 </div>

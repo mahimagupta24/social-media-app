@@ -21,6 +21,13 @@ const userReducer = (state, action) => {
           user._id === action.payload._id ? action.payload : user
         ),
       };
+      case "UNFOLLOW_USER":
+        return {
+          ...state,
+          users: state.users.map((user) =>
+            user._id === action.payload._id ? action.payload : user
+          ),
+        }
     default:
       return state;
   }
@@ -72,6 +79,30 @@ export default function UserProvider({ children }) {
         const followedUser = data.followUser;
 
         dispatch({ type: "FOLLOW_USER", payload: followedUser });
+
+        setUser((user) => ({ ...user, following: data.user.following }));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleUnFollow = async (followId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`/api/users/unfollow/${followId}`, {
+        method: "POST",
+        headers: { authorization: `bearer${token}` },
+        body: JSON.stringify({}),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+
+        // setUser(data.user);
+        const followedUser = data.followUser;
+
+        dispatch({ type: "UNFOLLOW_USER", payload: followedUser });
 
         setUser((user) => ({ ...user, following: data.user.following }));
       }
@@ -177,6 +208,7 @@ const suggestedUsers = allUsers
         // searchedUsers,
         setSearchText,
         handleFollow,
+        handleUnFollow,
         editUserInfo,
         suggestedUsers
         

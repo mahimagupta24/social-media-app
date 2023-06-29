@@ -20,14 +20,11 @@ export default function Suggestions() {
 
   return (
     <div className="suggestion-container">
-      <h1>Suggested users</h1>
+      <h2>SUGGESTED USERS</h2>
       {suggestedUsers.map(({ _id, fullname, username, profilePic }) => (
         <div className="suggestion-list" key={_id}>
           <img className="profile-pic" src={profilePic} />
           <div className="suggested-user-details">
-            <span>
-              <b>{fullname}</b>
-            </span>
             <span>@{username}</span>
           </div>
           <button onClick={() => handleFollow(_id)}>Follow</button>

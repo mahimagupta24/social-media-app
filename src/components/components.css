@@ -4,8 +4,10 @@
     
 }
 .suggestion-container{
-   border-left: 1px solid;
-   height:95%
+   border: none;
+   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+   text-align: center;
+   margin-right: 1rem;
 }
 .profile-pic{
     width: 50px;
@@ -20,28 +22,36 @@
     display: flex;
     flex-direction: column;
     /* justify-content: space-evenly; */
-    gap:6rem;
-    height: 95%;
-    border-right:1px solid ;
+    gap:4rem;
+    height: 100%;
     text-align: center;
-    margin-left:0px;
+    /* margin-left:0px; */
     
     
 }
 .side-bar-content{
-    margin-right:6rem;
-    font-size: 2rem;
+    /* margin-right:16rem; */
+    /* margin-left:4rem; */
+    font-size: 1.5rem;
+    margin-top:10%
    
 }
 .side-bar-link{
     text-decoration: none;
     color:black
 }
+
+.logout-btn{
+    width:55%;
+    border:none;
+    background-color: white;
+    font-size: 1.5rem;
+}
 .icon{
     margin-right:10px
 }
 input::placeholder {
-    font: 1.25rem/3 sans-serif;
+    font: 1rem sans-serif;
 }
 .header{
     display:flex;
@@ -67,3 +77,15 @@ input::placeholder {
     outline:none;
     padding-left:1rem;
 }
+
+.search-modal-main{
+    
+   position:absolute;
+   top:7%;
+   width:auto;
+   color:black;
+   background-color: white;
+   margin-left:40rem;
+   border:2px solid;
+   padding:4px
+ } 

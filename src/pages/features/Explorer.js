@@ -43,8 +43,7 @@ export default function Explorer() {
            );
           return <li 
             className="post-list"
-            key={post?._id}
-            
+            key={post?._id} 
           >
             <div>
               <img 
@@ -68,7 +67,8 @@ export default function Explorer() {
                 />
               )}
             </div>
-            <div className="btns">
+            <hr/>
+            <div className="rest-btns">
               {isBookmarked(post._id) ? (
                 <span
                   style={{ color: "red" }}
