@@ -62,8 +62,8 @@ export default function Explorer() {
                 <img 
                   src={post?.mediaUrl}
                   alt="random"
-                  height="250px"
-                  width="300px"
+                  height="300px"
+                  width="350px"
                 />
               )}
             </div>

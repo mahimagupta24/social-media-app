@@ -50,6 +50,9 @@
 .icon{
     margin-right:10px
 }
+.sign-out-icon{
+    margin-right:12px
+}
 input::placeholder {
     font: 1rem sans-serif;
 }

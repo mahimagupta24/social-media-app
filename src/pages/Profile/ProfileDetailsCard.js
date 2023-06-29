@@ -26,7 +26,10 @@ export default function ProfileDetailsCard({ setShowProfileDetails }) {
   };
 
   return (
-    <div>
+    <div className="modal-form-container">
+      <h2>Edit Profile</h2>
+
+      <div className="images-options">
       <img
         className="profile-options"
         src="https://tse1.mm.bing.net/th?id=OIP.GIX5K_H6IcDTpUBcApSiEQHaHa&pid=Api&P=0&h=180"
@@ -57,21 +60,26 @@ export default function ProfileDetailsCard({ setShowProfileDetails }) {
         alt="profile-pic"
         onClick={handleImageClick}
       />
-
-      <input
+</div>
+<div className="profileDetails">
+  <label><b>Bio</b></label>
+      <input className="profileInput"
         value={profileDetails.bio}
         onChange={(e) =>
           setProfileDetails({ ...profileDetails, bio: e.target.value })
         }
       />
-      <input
+      <label><b>Link</b></label>
+      <input className="profileInput"
         value={profileDetails.website}
         onChange={(e) =>
           setProfileDetails({ ...profileDetails, website: e.target.value })
         }
       />
+      </div>
       <button onClick={handleSaveProfile}>Save</button>
       <button onClick={handleCancel}>Cancel</button>
     </div>
+
   );
 }

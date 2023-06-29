@@ -215,12 +215,13 @@ export default function Home() {
                       {showEditingData && editId === post._id && (
                         <div className="addPost-mainDiv">
                           <div className="post-input-main">
-                          <div className="post-input">
+                            <h2>Edit post</h2>
+                          {/* <div className="post-input"> */}
                             <input id="input-text"
                               value={editContent}
                               onChange={(e) => setEditContent(e.target.value)}
                             />
-                          </div>
+                          {/* </div> */}
                           <div className="post-input">
                             <label for="file-upload">
                             <input id="file-upload"

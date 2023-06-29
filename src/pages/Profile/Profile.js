@@ -58,9 +58,9 @@ export default function Profile() {
         <div>
           <SideBar />
         </div>
-        <ul className="post-card">
+        <div >
           {username === user?.username ? (
-            <div className="user-profile">
+            <div className="profile">
               <img className="profile-pic" src={user?.profilePic} />
               <span>{user?.fullname}</span>
               <p className="user-bio">{user?.bio}</p>
@@ -68,19 +68,21 @@ export default function Profile() {
                 {user?.website}
               </a>
               <p>
-                {/* <span>Post:{userPosts.length}</span> */}
+                <span>Post:{loggedInUserPosts.length}</span>
                 <span>Followers:{user?.followers.length}</span>{" "}
                 <span>Following:{user?.following.length}</span>
               </p>
               <button className="edit-profile-btn" onClick={handleEditInfo}>
                 Edit
               </button>
+              <div>
               {showProfileDetails && (
                 <ProfileDetailsCard
                   showProfileDetails={showProfileDetails}
                   setShowProfileDetails={setShowProfileDetails}
                 />
               )}
+              </div>
             </div>
           ) : (
             <div className="user-profile">
@@ -88,7 +90,7 @@ export default function Profile() {
               <span>{userProfile?.fullname}</span>
               <p className="user-bio">{userProfile?.bio}</p>
               <p>
-                {/* <span>Post:{.length}</span> */}
+                <span>Post:{loggedInUserPosts.length}</span>{" "}
                 <span>Followers:{userProfile?.followers.length}</span>{" "}
                 <span>Following:{userProfile?.following.length}</span>
               </p>
@@ -180,7 +182,7 @@ export default function Profile() {
               );
             }
           )}
-        </ul>
+        </div>
 
         <div>
           <Suggestions />

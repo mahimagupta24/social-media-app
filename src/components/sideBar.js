@@ -21,7 +21,7 @@ export default function SideBar() {
       <Link className="side-bar-link"to="/bookmark"> <span  className="icon"><i className="fa fa-bookmark"></i></span>Bookmark</Link>
       </div>
       <div className="side-bar-content">
-     <button className="logout-btn" onClick={logoutHandler}> <span className="icon"><i class="fa fa-sign-out"></i></span>Logout</button>
+     <button className="logout-btn" onClick={logoutHandler}> <span className="sign-out-icon"><i class="fa fa-sign-out"></i></span>Logout</button>
     </div>
     </div>
 

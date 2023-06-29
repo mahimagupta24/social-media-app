@@ -146,7 +146,7 @@ color:grey
     gap:8px;
     position: relative;
     right:30rem;
-    bottom: 14rem; 
+    bottom: 18rem; 
      width:300px;
      gap:2.5rem;
      border:1px solid;
@@ -161,9 +161,9 @@ color:grey
   }
 
   #input-text{
-    height:10vh;
-    width: 20vh;
-   margin:8px;
+    height:8vh;
+    font-size: medium;
+    /* width: 20vh; */
   }
   .save-cancel{
     margin:8px;

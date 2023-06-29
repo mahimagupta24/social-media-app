@@ -2,3 +2,29 @@
     height: 100px;
     width: 100px;
 }
+.profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border:1px solid ;
+  border-radius:1rem;
+  width:600px
+}
+.modal-form-container{
+    background: rgba(255, 255, 255, 0.75);
+    width: 100%;
+    /* position: absolute; */
+    top: 5rem;
+    
+    height: 100%;
+    z-index: 2;
+    transition: background ease 0.3s;
+    /* display: flex; */
+}
+.profileDetails{
+    display: flex;
+    flex-direction: column;
+}
+.profileInput{
+    width:16rem
+}
