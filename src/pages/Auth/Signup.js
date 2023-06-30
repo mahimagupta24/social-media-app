@@ -7,62 +7,89 @@ export default function Signup() {
   const [signupDetails, setSignupDetails] = useState({
     firstName: "",
     lastName: "",
-    userName: "",
+    username: "",
     password: "",
   });
-
+  
   const onSubmitHandler = (e) => {
-    e.preventDefault();  
+    e.preventDefault();
     signupHandler(signupDetails);
-    setSignupDetails({firstName: "",
-    lastName: "",
-    userName: "",
-    password: "",})
+    setSignupDetails({
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+    });
+  
   };
   return (
-    <div>
-      <h1> Signup</h1>
-      <form onSubmit={onSubmitHandler}>
-        <label>First name</label>
-        <input
-          value={signupDetails.firstName}
-          onChange={(e) =>
-            setSignupDetails({ ...signupDetails, firstName: e.target.value })
-          }
-          required
-        />
-        <label>Last name</label>
-        <input
-          value={signupDetails.lastName}
-          onChange={(e) =>
-            setSignupDetails({ ...signupDetails, lastName: e.target.value })
-          }
-          required
-        />
-        <label>Email</label>
-        <input
-          value={signupDetails.email}
-
-          type="email"
-          onChange={(e) =>
-            setSignupDetails({ ...signupDetails, userName: e.target.value })
-          }
-          required
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          value={signupDetails.password}
-          onChange={(e) =>
-            setSignupDetails({ ...signupDetails, password: e.target.value })
-          }
-          required
-        />
-        <button type="submit" onClick={()=>signupHandler(signupDetails)}>Create account</button>
-        <p>
-          Already have an account?<Link to="/login">Login</Link>
-        </p>
-      </form>
+    <div className="signUp-main">
+      <div className="signUp-container">
+        <div>
+          <h1 className="signUp-heading"> Signup</h1>
+        </div>
+        <form className="details" onSubmit={onSubmitHandler}>
+          <div className="email">
+            <label>Email</label>
+            <input
+              placeholder="email"
+              value={signupDetails.username}
+              type="text"
+              onChange={(e) =>
+                setSignupDetails({ ...signupDetails, username: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="password">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="*******"
+              value={signupDetails.password}
+              onChange={(e) =>
+                setSignupDetails({ ...signupDetails, password: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="fName">
+            <label>First name</label>
+            <input
+              value={signupDetails.firstName}
+              placeholder="first name"
+              onChange={(e) =>
+                setSignupDetails({
+                  ...signupDetails,
+                  firstName: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
+          <div className="lName">
+            <label>Last name</label>
+            <input
+              placeholder="last name"
+              value={signupDetails.lastName}
+              onChange={(e) =>
+                setSignupDetails({ ...signupDetails, lastName: e.target.value })
+              }
+              required
+            />
+          </div>
+          <button
+            className="account-btn"
+            type="submit"
+            onClick={() => signupHandler(signupDetails)}
+          >
+            Create account
+          </button>
+          <p>
+            Already have an account?<Link to="/login">Login</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

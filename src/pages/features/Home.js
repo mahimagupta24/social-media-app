@@ -57,6 +57,7 @@ export default function Home() {
   const allPosts = [...loggedInUserPosts, ...followingPosts];
 
   console.log(allPosts);
+
   const handleSortedPost = () => {
     const sortedPosts = [...posts].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

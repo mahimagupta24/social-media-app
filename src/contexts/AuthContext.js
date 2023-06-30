@@ -21,17 +21,17 @@ export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
  
 
-  const signupHandler = async ({ firstName, lastName, userName, password }) => {
+  const signupHandler = async ({ firstName, lastName, username, password }) => {
     try {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
-        body: JSON.stringify({ firstName, lastName, userName, password }),
+        body: JSON.stringify({ firstName, lastName, username, password }),
       });
       if (response.status === 201) {
         const data = await response.json();
         // console.log(data);
         dispatch({ type: "AUTH_SUCCESS", payload: data.encodedToken });
-
+        navigate("/login")
       }
     } catch (e) {
       console.error(e);
@@ -67,6 +67,7 @@ const isLoggedIn = state.encodedToken.length!==0
   const logoutHandler = ()=>{
     localStorage.removeItem("token");
     dispatch({type:"LOGOUT"})
+    navigate("/login")
   }
 
   return (

@@ -277,7 +277,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "Wow, the weather is absolutely gorgeous today! Perfect day for some outdoor activities!",
+      "Wow, the weather is absolutely gorgeous today!",
     mediaUrl:"https://jooinn.com/images/cloudy-1.jpg",
       likes: {
       likeCount: 17,

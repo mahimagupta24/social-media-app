@@ -2,11 +2,18 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { SearchModal } from "./SearchModal";
+import { useState } from "react";
 
 export default function Header() {
   const { setSearchText, searchText } = useContext(UserContext);
   const { user } = useContext(AuthContext);
+  const[isSearching,setIsSearching] = useState(false)
 
+  const handleCancelSearch = () => {
+    
+    setIsSearching(false);
+    setSearchText("");
+  };
   return (
     <div>
       <div className="header">
@@ -27,10 +34,31 @@ export default function Header() {
           <input
             placeholder="search"
             className="search-bar"
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => {setSearchText(e.target.value)
+            setIsSearching(true)
+            }}
           />
+          {searchText && (
+            <div
+              className="cancel-icon"
+              onClick={handleCancelSearch}
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 1.41L10.59 0L6 4.59L1.41 0L0 1.41L4.59 6L0 10.59L1.41 12L6 7.41L10.59 12L12 10.59L7.41 6L12 1.41Z"
+                  fill="#666666"
+                />
+              </svg>
+            </div>
+          )}
           </div>
-          {searchText && <SearchModal searchText={searchText} />}
+          {searchText && isSearching&&<SearchModal searchText={searchText} />}
         
       
       </div>
