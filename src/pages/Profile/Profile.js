@@ -78,7 +78,7 @@ export default function Profile() {
               <div>
               {showProfileDetails && (
                 <ProfileDetailsCard
-                  showProfileDetails={showProfileDetails}
+                  // showProfileDetails={showProfileDetails}
                   setShowProfileDetails={setShowProfileDetails}
                 />
               )}

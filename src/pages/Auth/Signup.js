@@ -81,7 +81,7 @@ export default function Signup() {
           <button
             className="account-btn"
             type="submit"
-            onClick={() => signupHandler(signupDetails)}
+            // onClick={() => signupHandler(signupDetails)}
           >
             Create account
           </button>
