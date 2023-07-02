@@ -1,5 +1,6 @@
 import { createContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -32,6 +33,8 @@ export default function AuthProvider({ children }) {
         // console.log(data);
         dispatch({ type: "AUTH_SUCCESS", payload: data.encodedToken });
         navigate("/login")
+       
+
       }
     } catch (e) {
       console.error(e);
@@ -57,6 +60,7 @@ export default function AuthProvider({ children }) {
         localStorage.setItem("token", data.encodedToken);
 
         navigate("/")
+        toast.success("Logged in successfully")
       }
     } catch (e) {
       console.error(e);

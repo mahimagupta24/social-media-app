@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Signup from "./pages/Auth/Signup";
 import Login from "./pages/Auth/Login";
 import SideBar from "./components/sideBar";
@@ -13,10 +16,7 @@ import RequiresAuth from "./components/RequiresAuth";
 function App() {
   return (
     <div className="App">
-      {/* <SideBar/> */}
-      {/* <Suggestions/> */}
-      {/* <Profile/> */}
-      {/* <Explorer/> */}
+     <ToastContainer/>
       <Routes>
         <Route path="/"element={<RequiresAuth><Home/></RequiresAuth>}/>
         <Route path ="/signup"element={<Signup/>}/>

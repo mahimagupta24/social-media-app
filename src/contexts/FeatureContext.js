@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { useNavigate } from "react-router";
 import { AuthContext } from "./AuthContext";
+import { toast } from "react-toastify";
 
 export const FeatureContext = createContext();
 
@@ -71,6 +71,7 @@ export default function FeatureProvider({ children }) {
 
       if (response.status === 200 || response.status === 201) {
         const data = await response.json();
+        toast.success("post deleted")
         console.log(data);
         setPosts(data.posts);
       }
@@ -130,6 +131,8 @@ export default function FeatureProvider({ children }) {
       // console.log(response);
       if (response.status === 200 || response.status === 201) {
         const data = await response.json();
+        
+
         // console.log(data.posts);
         setPosts(data.posts);
       }

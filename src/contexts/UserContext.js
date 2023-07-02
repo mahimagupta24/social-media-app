@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { createContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { FeatureContext } from "./FeatureContext";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext();
 const userReducer = (state, action) => {
@@ -74,7 +75,7 @@ export default function UserProvider({ children }) {
 
       if (response.status === 200) {
         const data = await response.json();
-
+        toast.success("User followed")
         // setUser(data.user);
         const followedUser = data.followUser;
 
@@ -121,7 +122,7 @@ export default function UserProvider({ children }) {
       });
 
       const data = await response.json();
-
+      toast.success("Added to bookmarks")
       dispatch({ type: "ADD_BOOKMARK_POSTS", payload: data.bookmarks });
       setUser((user) => ({ ...user, bookmarks: data.bookmarks }));
     } catch (e) {
@@ -140,6 +141,7 @@ export default function UserProvider({ children }) {
 
       if (response.status === 200) {
         const data = await response.json();
+        toast.success("Removed from bookmarks")
 
         // dispatch({ type: "REMOVE_BOOKMARK_POSTS", payload:data.bookmarks});
         setUser((user) => ({ ...user, bookmarks: data.bookmarks }));
