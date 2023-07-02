@@ -12,7 +12,7 @@ export const posts = [
     content: "Exploring new places",
     mediaUrl:"https://1.bp.blogspot.com/-MiUcyHifn1U/XrvfpVzmI7I/AAAAAAAAAjc/eYazSDwPLasqFXYX7bx_yJUipkZ8Ci5IQCLcBGAsYHQ/s1600/tea-gardens-munnar.jpg",
     likes: {
-      likeCount: 4,
+      likeCount: 24,
       likedBy: [],
       dislikedBy: [],
     },
@@ -91,7 +91,7 @@ export const posts = [
     _id: uuid(),
     content: "Excited for the weekend getaway!",
     likes: {
-      likeCount: 7,
+      likeCount: 27,
       likedBy: [],
       dislikedBy: [],
     },
@@ -194,7 +194,7 @@ export const posts = [
     content: "Trying out a new recipe. Finger-licking good!",
     mediaUrl:"https://www.teacher-chef.com/wp-content/uploads/2012/01/1-5-salsa-made-from-canned-tomato1.jpg",
     likes: {
-      likeCount: 9,
+      likeCount: 19,
       likedBy: [],
       dislikedBy: [],
     },
@@ -241,7 +241,7 @@ export const posts = [
     _id: uuid(),
     content: "Believe in yourself. You are capable of amazing things",
     likes: {
-      likeCount: 11,
+      likeCount: 18,
       likedBy: [],
       dislikedBy: [],
     },
