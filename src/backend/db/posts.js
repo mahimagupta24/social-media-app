@@ -277,7 +277,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "Wow, the weather is absolutely gorgeous today!",
+      "Wow, the weather is absolutely gorgeous today! Its a perfect time to go outside and enjoy it",
     mediaUrl:"https://jooinn.com/images/cloudy-1.jpg",
       likes: {
       likeCount: 17,
@@ -296,7 +296,7 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content:" Just picked up this captivating novel that has been on my reading list for a while.If you have any book recommendations or if you've read this one, I'd love to hear your thoughts",
+    content:" Just picked up this captivating novel that has been on my reading list for a while.If you've read this one, I'd love to hear your thoughts",
       
     mediaUrl:"https://www.leafmarks.com/uploads/9/8/4/9/98493490/hamlet-by-william-shakespeare_orig.jpg",
       likes: {

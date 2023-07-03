@@ -6,7 +6,7 @@ export default function Suggestions() {
   const { state, handleFollow,suggestedUsers } = useContext(UserContext);
   const { user: loggedInUser } = useContext(AuthContext);
 
- 
+ console.log(suggestedUsers)
 
   // const allUsers = state.users;
   // const myFollowing = loggedInUser.following;

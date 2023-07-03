@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
-const initialState = { encodedToken: "" };
+// const initialState = { encodedToken: "" };
+const initialToken = localStorage.getItem("token") || "";
+const initialUser = JSON.parse(localStorage.getItem("loggedInUser")) || null;
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -17,9 +19,9 @@ const authReducer = (state, action) => {
 export default function AuthProvider({ children }) {
   const navigate = useNavigate()
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(initialUser);
   
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer,{encodedToken:initialToken});
  
 
   const signupHandler = async ({ firstName, lastName, username, password }) => {

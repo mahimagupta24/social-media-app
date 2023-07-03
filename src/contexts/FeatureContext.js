@@ -14,6 +14,8 @@ export default function FeatureProvider({ children }) {
   const [likedPosts, setLikedPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
+  
+
   const fetchAllPosts = async () => {
     try {
       const response = await fetch("/api/posts", {

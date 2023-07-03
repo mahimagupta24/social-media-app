@@ -41,9 +41,11 @@ export default function UserProvider({ children }) {
   };
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, } = useContext(AuthContext);
   const [searchText, setSearchText] = useState("");
   const { setUserPosts,setPosts } = useContext(FeatureContext);
+
+  const socialUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   const getAllUsers = async () => {
     try {
@@ -191,15 +193,16 @@ export default function UserProvider({ children }) {
 
   const allUsers = state.users;
   const myFollowing = user?.following;
+  console.log(user)
+
 const suggestedUsers = allUsers
-  .filter(({ _id }) => _id !== user?._id)
+  .filter(({ username }) => username !== user?.username)
   .filter(
     (user) =>
       !myFollowing?.some((followedUser) => followedUser._id === user._id)
   );
 
-  // suggestedUsers =searchText!=="" ?suggestedUsers.filter(({username})=>username.includes(searchText)):suggestedUsers
-
+console.log(suggestedUsers)
   return (
     <UserContext.Provider
       value={{
