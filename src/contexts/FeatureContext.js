@@ -82,10 +82,11 @@ export default function FeatureProvider({ children }) {
     }
   };
 
-  const EditPost = async (postId,editText,editPic) => {
+  const EditPost = async (postId,editText,editPic,editProfilePic) => {
     const postData={
       content:editText,
-      mediaUrl:editPic
+      mediaUrl:editPic,
+       profilePic:editProfilePic
     }
     try {
       const token = localStorage.getItem("token");

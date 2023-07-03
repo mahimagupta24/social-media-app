@@ -26,22 +26,18 @@ export default function Profile() {
 
   const loggedInUserPosts = posts.filter((post) => post.username === username);
   //  console.log(user.profilePic)
-  // console.log(loggedInUserPosts)
+   console.log(loggedInUserPosts)
 
   const [showProfileDetails, setShowProfileDetails] = useState(false);
 
   // console.log(state.users);
-  // console.log(username);
+   console.log(posts);
 
   const userProfile = state.users.find((user) => user.username === username);
   // console.log(userProfile);
 
   //  const suggestedUser = userPosts.find(({username})=>username===username)
   //  console.log(suggestedUser)
-
-  const handleEditInfo = () => {
-    setShowProfileDetails(true);
-  };
 
   const isFollowed = user?.following?.some(
     ({ username }) => username === userProfile?.username
@@ -72,7 +68,7 @@ export default function Profile() {
                 <span>Followers:{user?.followers.length}</span>{" "}
                 <span>Following:{user?.following.length}</span>
               </p>
-              <button className="edit-profile-btn" onClick={handleEditInfo}>
+              <button className="edit-profile-btn" onClick={()=>setShowProfileDetails(true)}>
                 Edit
               </button>
               <div>

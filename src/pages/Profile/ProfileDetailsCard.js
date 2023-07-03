@@ -3,10 +3,12 @@ import { useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UserContext } from "../../contexts/UserContext";
 import "./Profile.css";
+import { FeatureContext } from "../../contexts/FeatureContext";
 
 export default function ProfileDetailsCard({ setShowProfileDetails }) {
   const { user } = useContext(AuthContext);
   const { editUserInfo } = useContext(UserContext);
+  const {posts,EditPost}= useContext(FeatureContext)
   const [profileDetails, setProfileDetails] = useState({
     profilePic: user.profilePic,
     bio: user.bio,
@@ -19,6 +21,12 @@ export default function ProfileDetailsCard({ setShowProfileDetails }) {
 
   const handleSaveProfile = () => {
     editUserInfo(profileDetails);
+    const loggedUserPosts = posts.filter(({username})=>username===user.username)
+     for (let i = 0;i<loggedUserPosts.length;i++){
+       EditPost(loggedUserPosts[i]._id,loggedUserPosts[i].content,loggedUserPosts[i].mediaUrl,profileDetails.profilePic)
+     }
+  //  EditPost(user._id,user.content,user.mediaUrl,user.profilePic)
+    // console.log(loggedUserPosts)
     setShowProfileDetails(false);
   };
   const handleCancel = () => {

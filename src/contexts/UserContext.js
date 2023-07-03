@@ -171,20 +171,22 @@ export default function UserProvider({ children }) {
         const data = await response.json();
         console.log(data.user);
         setUser(data.user);
-        setUserPosts((posts) =>
-          posts.map((post) =>
-            post.username === data.user.username
-              ? { ...post, profilePic: data.user.profilePic }
-              : post
-          )  
-        );
-        setPosts((posts) =>
-          posts.map((post) =>
-            post.username === data.user.username
-              ? { ...post, profilePic: data.user.profilePic }
-              : post
-          )  
-        );
+        // setUserPosts((posts) =>
+        //   posts.map((post) =>
+        //     post.username === data.user.username
+        //       ? { ...post, profilePic: data.user.profilePic }
+        //       : post
+        //   )  
+        // );
+        // setPosts((posts) =>
+        //   posts.map((post) =>
+        //     post.username === data.user.username
+        //       ? { ...post, profilePic: data.user.profilePic }
+        //       : post
+              
+        //   )  
+        // );
+        
       }
     } catch (e) {
       console.error(e);
