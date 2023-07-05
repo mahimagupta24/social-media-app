@@ -26,7 +26,7 @@ export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer,initialState);
  
 
-  const signupHandler = async ({ firstName, lastName, username, password }) => {
+  const signupHandler = async ({ firstName, lastName, username, password, }) => {
     try {
       const response = await fetch("/api/auth/signup", {
         method: "POST",

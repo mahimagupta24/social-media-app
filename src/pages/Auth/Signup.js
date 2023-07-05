@@ -9,6 +9,7 @@ export default function Signup() {
     lastName: "",
     username: "",
     password: "",
+    
   });
   
   const onSubmitHandler = (e) => {
@@ -19,6 +20,7 @@ export default function Signup() {
       lastName: "",
       username: "",
       password: "",
+      
     });
   
   };
