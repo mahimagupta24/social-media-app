@@ -124,7 +124,6 @@ export default function Home() {
               Trending
             </button>
           </div>
-
           {allPosts.map((post) => {
             const myUsername = socialUser?.username;
             const isLiked = post?.likes?.likedBy.some(
@@ -158,6 +157,9 @@ export default function Home() {
                     <span>{post.createdAt}</span>
                   </div>
                 </div>
+                {/* <div className="side-dots">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="dots"><g><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></g></svg>
+          </div> */}
                 <p>{post.content}</p>
                 <div>
                   {post.mediaUrl && (
@@ -203,7 +205,7 @@ export default function Home() {
                     <i className="fa fa-comment"></i>
                     {post.comments?.length > 0 && post.comments?.length}
                   </span>
-
+                   <div className="owner">
                   {isOwner && (
                     <div className="edit-delete">
                       <span onClick={() => deletePosts(post._id)}>
@@ -248,7 +250,7 @@ export default function Home() {
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
                                     stroke="currentColor"
-                                    class="w-2 h-2"
+                                    class="svg-icon"
                                   >
                                     <path
                                       stroke-linecap="round"
@@ -283,6 +285,7 @@ export default function Home() {
                       )}
                     </div>
                   )}
+                  </div>
                 </div>
               </li>
             );

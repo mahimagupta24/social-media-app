@@ -160,9 +160,11 @@ color:grey
     display: none;
   }
 
-  #svg-icon{
-    font-size: small;
+  .svg-icon{
+    height:20px;
+    color:#3498db
   }
+  
   #input-text{
     height:8vh;
     font-size: medium;

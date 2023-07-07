@@ -30,7 +30,7 @@ export default function AuthProvider({ children }) {
     try {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
-        body: JSON.stringify({ firstName, lastName, username, password }),
+        body: JSON.stringify({ firstName, lastName, username, password,profilePic:"https://tse1.mm.bing.net/th?id=OIP.LSDaZCxRd9oeYsgbJXDp7AHaEK&pid=Api&P=0&h=180" }),
       });
       if (response.status === 201) {
         const data = await response.json();

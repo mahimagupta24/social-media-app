@@ -31,30 +31,7 @@ export default function Signup() {
           <h1 className="signUp-heading"> Signup</h1>
         </div>
         <form className="details" onSubmit={onSubmitHandler}>
-          <div className="email">
-            <label>Email</label>
-            <input
-              placeholder="email"
-              value={signupDetails.username}
-              type="text"
-              onChange={(e) =>
-                setSignupDetails({ ...signupDetails, username: e.target.value })
-              }
-              required
-            />
-          </div>
-          <div className="password">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="*******"
-              value={signupDetails.password}
-              onChange={(e) =>
-                setSignupDetails({ ...signupDetails, password: e.target.value })
-              }
-              required
-            />
-          </div>
+         
           <div className="fName">
             <label>First name</label>
             <input
@@ -80,6 +57,30 @@ export default function Signup() {
               required
             />
           </div>
+          <div className="email">
+            <label>Username</label>
+            <input
+              placeholder="username"
+              value={signupDetails.username}
+              type="text"
+              onChange={(e) =>
+                setSignupDetails({ ...signupDetails, username: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="password">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="*******"
+              value={signupDetails.password}
+              onChange={(e) =>
+                setSignupDetails({ ...signupDetails, password: e.target.value })
+              }
+              required
+            />
+          </div>
           <button
             className="account-btn"
             type="submit"
@@ -87,7 +88,7 @@ export default function Signup() {
           >
             Create account
           </button>
-          <p>
+          <p style={{textAlign:"center"}}>
             Already have an account?<Link to="/login">Login</Link>
           </p>
         </form>
