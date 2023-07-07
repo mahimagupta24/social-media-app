@@ -2,6 +2,7 @@
     width: 50px;
     border-radius: 50%;
     height: 60px;
+    /* left:33% */
     /* position: relative;   */
     /* display: flex;
     margin-left:12rem; */
@@ -183,3 +184,11 @@ color:grey
     color:#3498db;
     background-color:white;
   }
+  /* .profile-info{
+    display: flex;
+    flex-direction: column;
+  }
+  .p-name{
+    top:2%;
+    position: relative;
+  } */

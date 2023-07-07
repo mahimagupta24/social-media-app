@@ -92,3 +92,11 @@ input::placeholder {
    border:2px solid;
    padding:4px
  } 
+
+ .side-bar-link:hover{
+    color:#9D9D9D
+ }
+ .logout-btn:hover{
+    color:#9D9D9D ;
+    cursor: pointer;
+ }

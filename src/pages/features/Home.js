@@ -138,25 +138,25 @@ export default function Home() {
                 }`}
                 key={post._id}
               >
-                <div>
+              
                   <div className="profile-info">
                     <img
                       className="profile-pic"
                       src={post.profilePic}
                       alt="profile"
                     />
-
-                    <span>
+                  
+                    <span className="p-name" >
                       <b>
                         {post.firstName} {post.lastName}
                       </b>
                     </span>
-                    <span onClick={() => handleUserPosts(post.username)}>
+                    {/* <span onClick={() => handleUserPosts(post.username)}>
                       @{post.username}
-                    </span>
+                    </span> */} {" "}
                     <span>{post.createdAt}</span>
                   </div>
-                </div>
+                 
                 {/* <div className="side-dots">
           <svg viewBox="0 0 24 24" aria-hidden="true" class="dots"><g><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></g></svg>
           </div> */}
