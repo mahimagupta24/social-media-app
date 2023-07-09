@@ -146,7 +146,7 @@ export default function Home() {
                       alt="profile"
                     />
                   
-                    <span className="p-name" >
+                    <span style={{cursor:"pointer"}}className="p-name"onClick={()=>handleUserPosts(post.username)} >
                       <b>
                         {post.firstName} {post.lastName}
                       </b>
