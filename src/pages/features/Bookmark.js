@@ -35,17 +35,17 @@ export default function Bookmark() {
           return (
             <div className="post-list" key={post._id}>
               <div className="profile-details">
-                <img className="profile-pic" src={post.profilePic} />
+                <img className="profile-pic" src={post?.profilePic} />
                 <span>
-                  {post.firstName} {post.lastName}
+                  {post?.firstName} {post?.lastName}
                 </span>
-                <span className="profile-username">@{post.username}</span>
+                <span className="profile-username">@{post?.username}</span>
               </div>
-              <p>{post.content}</p>
+              <p>{post?.content}</p>
               <div>
-                {post.mediaUrl && (
+                {post?.mediaUrl && (
                   <img
-                    src={post.mediaUrl}
+                    src={post?.mediaUrl}
                     alt="random"
                     height="250px"
                     width="300px"
